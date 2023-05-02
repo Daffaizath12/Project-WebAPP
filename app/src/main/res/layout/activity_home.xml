@@ -100,7 +100,7 @@
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/cat_background">
+                        android:background="#1e3d59">
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -118,7 +118,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:text="Home"
-                            android:textColor="#000000"
+                            android:textColor="#ffffff"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -131,7 +131,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="32dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/cat_background">
+                        android:background="#1e3d59">
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -149,7 +149,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
                             android:text="Office"
-                            android:textColor="#000000"
+                            android:textColor="#ffffff"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -169,7 +169,7 @@
                         android:layout_width="0dp"
                         android:layout_height="70dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/cat_background">
+                        android:background="#1e3d59">
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -186,8 +186,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="Apartment"
-                            android:textColor="#000000"
+                            android:text="Discount"
+                            android:textColor="#ffffff"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -200,7 +200,7 @@
                         android:layout_marginStart="8dp"
                         android:layout_marginEnd="32dp"
                         android:layout_weight="0.5"
-                        android:background="@drawable/cat_background">
+                        android:background="#1e3d59">
 
                         <ImageView
                             android:id="@+id/imageView5"
@@ -217,8 +217,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="Villa"
-                            android:textColor="#000000"
+                            android:text="More"
+                            android:textColor="#ffffff"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -242,7 +242,7 @@
                     android:layout_weight="1"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="#1e3d59"
                     android:text="Populer" />
 
                 <TextView
@@ -251,7 +251,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAlignment="viewEnd"
-                    android:textColor="#fe6900"
+                    android:textColor="#1e3d59"
                     android:textStyle="bold"
                     android:text="See All" />
             </LinearLayout>
@@ -278,7 +278,7 @@
                     android:layout_weight="1"
                     android:textStyle="bold"
                     android:textSize="20sp"
-                    android:textColor="#000000"
+                    android:textColor="#1e3d59"
                     android:text="New" />
 
                 <TextView
@@ -287,7 +287,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textAlignment="viewEnd"
-                    android:textColor="#fe6900"
+                    android:textColor="#1e3d59"
                     android:textStyle="bold"
                     android:text="See All" />
             </LinearLayout>

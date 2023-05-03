@@ -28,7 +28,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentStart="true"
                     android:layout_centerInParent="true"
-                    android:text="Pesan Tiket"
+                    android:text="Pemesanan Rumah"
                     android:textColor="#f5f0e1"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -61,7 +61,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="480dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -156,7 +156,7 @@
                             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/select">
+                            android:hint="@string/cluster">
 
                             <AutoCompleteTextView
                                 android:id="@+id/auto_complete_text"
@@ -165,30 +165,46 @@
                                 android:inputType="none" />
 
                         </com.google.android.material.textfield.TextInputLayout>
-                        <com.google.android.material.textfield.TextInputLayout
-                            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                                android:layout_width="210dp"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/pemabayaran">
+
+
+                                <AutoCompleteTextView
+                                    android:id="@+id/pembayaran"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:inputType="none" />
+
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <EditText
+                                android:id="@+id/txttanggal"
+                                android:layout_width="120dp"
+                                android:layout_height="wrap_content"
+                                android:focusable="false"
+                                android:text="Tanggal"
+                                android:drawableEnd="@drawable/date"
+                                android:textAlignment="center"
+                                android:textSize="12sp"/>
+
+                        </LinearLayout>
+                        <EditText
+                            android:id="@+id/uploadfile"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:hint="@string/select">
-
-                            <AutoCompleteTextView
-                                android:id="@+id/pembayaran"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:inputType="none" />
-
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="20dp"
-                        android:orientation="horizontal">
-
+                            android:layout_marginTop="10dp"
+                            android:drawableStart="@drawable/uplaod"
+                            android:hint="Upload File KTP disini" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -200,7 +216,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_margin="30dp"
-                android:text="Jemput Sekarang"
+                android:text="Pesan Sekarang"
                 android:textAllCaps="false"
                 android:textColor="@color/white"
                 android:textSize="16sp"

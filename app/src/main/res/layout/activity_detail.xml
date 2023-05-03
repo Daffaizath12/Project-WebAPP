@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".DetailActivity">
+    tools:context=".DetailActivity"
+    android:background="#f5f0e1">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -230,17 +231,21 @@
                 android:textColor="#000000"
                 android:textSize="16sp"/>
 
-            <Button
-                android:id="@+id/button"
-                style="@android:style/Widget.Button"
-                android:background="@drawable/background_btn"
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/buyBtn"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
+                android:layout_margin="30dp"
                 android:text="Buy Now"
-                android:layout_margin="32dp"
-                android:textSize="18sp"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="@color/white"/>
+                android:theme="@style/Theme.MaterialComponents"
+                app:backgroundTint="#1e3d59"
+                app:cornerRadius="50dp"
+                app:elevation="5dp"
+                app:rippleColor="#1e3d59" />
         </LinearLayout>
     </ScrollView>
 

@@ -1,7 +1,10 @@
 package com.example.project_webapp;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.icu.text.DecimalFormat;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,6 +16,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView titleTxt, addressTxt, bedTxt, bathTxt, wifiTxt, descriptionTxt, priceTxt;
     private ItemsDomain item;
     private ImageView pic;
+    private Button buyBtn;
 
     DecimalFormat formatter = new DecimalFormat("###,###,###,###.##");
 
@@ -56,5 +60,8 @@ public class DetailActivity extends AppCompatActivity {
         descriptionTxt = findViewById(R.id.descriptionTxt);
         pic = findViewById(R.id.pic);
         priceTxt = findViewById(R.id.priceTxt);
+
+        buyBtn = findViewById(R.id.buyBtn);
+        buyBtn.setOnClickListener(view -> startActivity(new Intent(DetailActivity.this, PemesananActivity.class)));
     }
 }

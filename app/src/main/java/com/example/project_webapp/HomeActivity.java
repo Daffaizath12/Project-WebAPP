@@ -41,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
                 "Architectural features and high-end finishes \n" +
                 "Feel inspired by open sight line thats \n" +
                 "embrace the outdoors, crowned by stunning \n" +
-                "coffered ceilings. ", 3,1, 3950000,"pic3", true));
+                "coffered ceilings. ", 3,1, 3950000,"pic2", false));
 
         recyclerViewPopuler = findViewById(R.id.viewPopuler);
         recyclerViewNew = findViewById(R.id.viewNew);

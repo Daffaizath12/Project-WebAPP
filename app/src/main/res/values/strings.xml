@@ -2,4 +2,5 @@
     <string name="app_name">Project-WebAPP</string>
     <string name="cluster">Cluster</string>
     <string name="pemabayaran">Pembayaran</string>
+    <string name="layanan">Our Service</string>
 </resources>

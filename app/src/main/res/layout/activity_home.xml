@@ -117,7 +117,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="Home"
+                            android:text="Properti Baru"
                             android:textColor="#ffffff"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -148,7 +148,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="Office"
+                            android:text="Cluster"
                             android:textColor="#ffffff"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -217,7 +217,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:text="More"
+                            android:text="Fasilitas"
                             android:textColor="#ffffff"
                             android:textStyle="bold"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -346,12 +346,12 @@
                     android:orientation="vertical">
 
                     <ImageView
-                        android:id="@+id/imageView6"
+                        android:id="@+id/layanan"
                         android:layout_width="32dp"
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/layanan_1" />
+                        app:srcCompat="@drawable/cluster" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -382,7 +382,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center"
                         android:layout_weight="1"
-                        app:srcCompat="@drawable/cluster" />
+                        app:srcCompat="@drawable/layanan_1" />
                 </LinearLayout>
 
                 <LinearLayout

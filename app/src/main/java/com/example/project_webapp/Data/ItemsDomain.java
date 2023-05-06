@@ -1,4 +1,4 @@
-package com.example.project_webapp;
+package com.example.project_webapp.Data;
 
 import java.io.Serializable;
 

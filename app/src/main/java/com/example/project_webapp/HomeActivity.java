@@ -6,6 +6,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.project_webapp.Adapter.ItemsAdapter;
+import com.example.project_webapp.Data.ItemsDomain;
+
 import java.util.ArrayList;
 
 public class HomeActivity extends AppCompatActivity {

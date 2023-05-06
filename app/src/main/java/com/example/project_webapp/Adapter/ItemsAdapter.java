@@ -1,10 +1,9 @@
-package com.example.project_webapp;
+package com.example.project_webapp.Adapter;
 
 
 import android.content.Context;
 import android.content.Intent;
 import android.icu.text.DecimalFormat;
-import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.transition.Transition;
+import com.example.project_webapp.DetailActivity;
+import com.example.project_webapp.Data.ItemsDomain;
+import com.example.project_webapp.R;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,5 @@
 package com.example.project_webapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.icu.text.DecimalFormat;
 import android.os.Bundle;
@@ -11,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
+import com.example.project_webapp.Data.ItemsDomain;
 
 public class DetailActivity extends AppCompatActivity {
     private TextView titleTxt, addressTxt, bedTxt, bathTxt, wifiTxt, descriptionTxt, priceTxt;

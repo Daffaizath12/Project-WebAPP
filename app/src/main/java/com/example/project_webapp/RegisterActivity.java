@@ -7,15 +7,15 @@ import android.os.Bundle;
 
 public class RegisterActivity extends AppCompatActivity {
 
-    lateinit var binding: RegisterActivity
+//    lateinit var binding: RegisterActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        binding.textToRegister.setOnClickListener {
-            Intent(Intent(this, RegisterActivity::class.java))
-        }
+//        binding.textToRegister.setOnClickListener {
+//            Intent(Intent(this, RegisterActivity::class.java))
+//        }
     }
 }

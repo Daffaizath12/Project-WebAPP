@@ -1,4 +1,4 @@
-package com.example.project_webapp;
+package com.example.project_webapp.Adapter;
 
 import java.io.Serializable;
 

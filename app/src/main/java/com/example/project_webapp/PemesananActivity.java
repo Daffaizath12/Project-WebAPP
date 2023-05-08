@@ -11,8 +11,10 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -28,12 +30,14 @@ public class PemesananActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     SimpleDateFormat dateFormatter;
 
-    Button backbtn;
+//    ImageView backbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pemesanan);
+
+//        initView();
 
         txttanggal = (EditText) findViewById(R.id.txttanggal);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
@@ -70,6 +74,11 @@ public class PemesananActivity extends AppCompatActivity {
         });
 
     }
+
+//    private void initView() {
+//        backbtn = findViewById(R.id.backbtn);
+//        backbtn.setOnClickListener(view -> startActivity(new Intent(PemesananActivity.this, DetailActivity.class)));
+//    }
 
     private void showDateDialog() {
         Calendar calendar = Calendar.getInstance();

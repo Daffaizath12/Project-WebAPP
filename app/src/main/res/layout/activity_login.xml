@@ -8,23 +8,30 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="150dp"
+        android:layout_marginBottom="5dp"
+        app:srcCompat="@drawable/logo" />
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="10dp"
         android:layout_marginBottom="5dp"
         android:fontFamily="@font/poppinsextra"
         android:gravity="center"
-        android:text="Welcome !"
+        android:text="Selamat Datang !"
         android:textColor="@color/btn"
-        android:textSize="40sp" />
+        android:textSize="35sp" />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppinsregular"
         android:gravity="center"
-        android:text="Silahkan login untuk melanjutkan"
+        android:text="Silahkan masuk untuk melanjutkan"
         android:textColor="@color/btn"
         android:textSize="15sp" />
 
@@ -35,7 +42,7 @@
         android:padding="35dp">
 
         <EditText
-            android:id="@+id/Username"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/username"
@@ -46,13 +53,13 @@
             android:textSize="14dp" />
 
         <EditText
-            android:id="@+id/Password"
+            android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@drawable/password"
             android:fontFamily="@font/poppinsregular"
-            android:hint="Password"
+            android:hint="Kata Sandi"
             android:paddingLeft="8dp"
             android:paddingTop="5dp"
             android:textSize="14dp" />
@@ -62,7 +69,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:fontFamily="@font/poppinssemibold"
-            android:text="Lupa Password"
+            android:text="Lupa Sandi"
             android:textColor="@color/btn" />
 
         <androidx.appcompat.widget.AppCompatButton

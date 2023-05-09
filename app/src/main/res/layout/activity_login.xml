@@ -11,7 +11,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="40dp"
         android:layout_marginBottom="5dp"
         app:srcCompat="@drawable/logo" />
 
@@ -25,15 +25,6 @@
         android:text="Selamat Datang !"
         android:textColor="@color/btn"
         android:textSize="35sp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fontFamily="@font/poppinsregular"
-        android:gravity="center"
-        android:text="Silahkan masuk untuk melanjutkan"
-        android:textColor="@color/btn"
-        android:textSize="15sp" />
 
     <LinearLayout
         android:layout_width="match_parent"

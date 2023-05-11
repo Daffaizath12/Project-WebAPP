@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/backgroud"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".RegisterActivity">
 
     <TextView
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
         android:padding="35dp">
 
         <EditText
-            android:id="@+id/nama"
+            android:id="@+id/nama_lengkap"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/nama"

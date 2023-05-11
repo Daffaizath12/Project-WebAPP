@@ -36,9 +36,9 @@
             android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/username"
+            android:background="@drawable/email"
             android:fontFamily="@font/poppinsregular"
-            android:hint="Username"
+            android:hint="Email"
             android:paddingLeft="8dp"
             android:paddingTop="5dp"
             android:textSize="14dp" />
@@ -50,7 +50,7 @@
             android:layout_marginTop="10dp"
             android:background="@drawable/password"
             android:fontFamily="@font/poppinsregular"
-            android:hint="Kata Sandi"
+            android:hint="Password"
             android:paddingLeft="8dp"
             android:paddingTop="5dp"
             android:textSize="14dp" />

@@ -35,7 +35,7 @@
         android:padding="35dp">
 
         <EditText
-            android:id="@+id/nama_lengkap"
+            android:id="@+id/username"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/nama"
@@ -46,23 +46,11 @@
             android:textSize="14dp" />
 
         <EditText
-            android:id="@+id/username"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/username"
-            android:fontFamily="@font/poppinsregular"
-            android:hint="Username"
-            android:paddingLeft="8dp"
-            android:paddingTop="5dp"
-            android:textSize="14dp" />
-
-        <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@drawable/telp"
+            android:background="@drawable/email"
             android:fontFamily="@font/poppinsregular"
             android:hint="Email"
             android:paddingLeft="8dp"

@@ -11,6 +11,7 @@ import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,7 +35,9 @@ public class RegisterActivity extends AppCompatActivity {
 
     private EditText editTextName, editTextEmail, editTextPassword;
     private Button buttonRegister;
+    private ProgressBar loading;
     private  TextView loginBtn;
+    private static String url = "http://localhost/_LaravelProject/Project-WSI/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         // Inisialisasi view
+        loading = findViewById(R.id.loading);
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
         editTextName = findViewById(R.id.username);
@@ -52,7 +56,7 @@ public class RegisterActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                register();
+                //
             }
         });
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -66,51 +70,44 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register() {
-        String email = editTextEmail.getText().toString().trim();
-        String password = editTextPassword.getText().toString().trim();
-        String name = editTextName.getText().toString().trim();
+        loading.setVisibility(View.VISIBLE);
+        buttonRegister.setVisibility(View.GONE);
 
-        // Validasi email, password, dan name
-        if (TextUtils.isEmpty(email)) {
-            editTextEmail.setError("Email is required");
-            editTextEmail.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            editTextPassword.setError("Password is required");
-            editTextPassword.requestFocus();
-            return;
-        }
-
-        if (TextUtils.isEmpty(name)) {
-            editTextName.setError("Name is required");
-            editTextName.requestFocus();
-            return;
-        }
+        final String email = editTextEmail.getText().toString().trim();
+        final String password = editTextPassword.getText().toString().trim();
+        final String name = editTextName.getText().toString().trim();
 
         // Kirim request registrasi ke server menggunakan Volley
-        String url = "http://bernadylandslawu.wsmif3a.id/";
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        // Handle response dari server setelah registrasi berhasil
-                        // Misalnya, menampilkan pesan registrasi berhasil atau langsung pindah ke halaman login
-                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
+                        try{
+                            JSONObject jsonObject = new JSONObject(response);
+                            String succes = jsonObject.getString("success");
 
-                        Toast.makeText(getApplicationContext(), "Registration successful", Toast.LENGTH_SHORT).show();
+                            if (succes.equals("1")){
+                                Toast.makeText(RegisterActivity.this, "Register successful", Toast.LENGTH_SHORT).show();
+                            }
+                        }catch (JSONException e){
+                            e.printStackTrace();
+                            Toast.makeText(RegisterActivity.this, "Register error" + e.toString(), Toast.LENGTH_SHORT).show();
+                            loading.setVisibility(View.VISIBLE);
+                            buttonRegister.setVisibility(View.GONE);
+                        }
                     }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                // Handle error dari server saat registrasi gagal
-                // Misalnya, menampilkan pesan error pada EditText atau menampilkan dialog error
-                Toast.makeText(getApplicationContext(), "Registration failed: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-            }
-        }) {
+                },
+                new Response.ErrorListener(){
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // Handle error dari server saat registrasi gagal
+                        // Misalnya, menampilkan pesan error pada EditText atau menampilkan dialog error
+                        Toast.makeText(getApplicationContext(), "Registration failed: " + error.toString(), Toast.LENGTH_SHORT).show();
+                        loading.setVisibility(View.VISIBLE);
+                        buttonRegister.setVisibility(View.GONE);
+                    }
+                })
+        {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();

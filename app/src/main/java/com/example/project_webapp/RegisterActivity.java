@@ -1,13 +1,8 @@
 package com.example.project_webapp;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.os.Handler;
-import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -21,9 +16,9 @@ import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.project_webapp.Config.VolleySingleton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -37,7 +32,7 @@ public class RegisterActivity extends AppCompatActivity {
     private Button buttonRegister;
     private ProgressBar loading;
     private  TextView loginBtn;
-    private static String url = "http://localhost/_LaravelProject/Project-WSI/";
+    private static String url = "http://localhost/Project-WSI/api/register_api.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +52,9 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //
+                if (v == buttonRegister){
+                    register();
+                }
             }
         });
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -70,30 +68,30 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void register() {
-        loading.setVisibility(View.VISIBLE);
-        buttonRegister.setVisibility(View.GONE);
 
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
         final String name = editTextName.getText().toString().trim();
 
-        // Kirim request registrasi ke server menggunakan Volley
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try{
-                            JSONObject jsonObject = new JSONObject(response);
-                            String succes = jsonObject.getString("success");
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("username", name);
+            jsonObject.put("password", password);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
-                            if (succes.equals("1")){
-                                Toast.makeText(RegisterActivity.this, "Register successful", Toast.LENGTH_SHORT).show();
-                            }
-                        }catch (JSONException e){
+        // Membuat permintaan POST menggunakan Volley
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        // Respon berhasil dari server
+                        try {
+                            String success = response.getString("success");
+                            Toast.makeText(RegisterActivity.this, success, Toast.LENGTH_SHORT).show();
+                        } catch (JSONException e) {
                             e.printStackTrace();
-                            Toast.makeText(RegisterActivity.this, "Register error" + e.toString(), Toast.LENGTH_SHORT).show();
-                            loading.setVisibility(View.VISIBLE);
-                            buttonRegister.setVisibility(View.GONE);
                         }
                     }
                 },
@@ -101,10 +99,10 @@ public class RegisterActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         // Handle error dari server saat registrasi gagal
+                        String errorMessage = "Error: " + error.getMessage();
+                        Log.e("TAG_ERROR", errorMessage);
                         // Misalnya, menampilkan pesan error pada EditText atau menampilkan dialog error
-                        Toast.makeText(getApplicationContext(), "Registration failed: " + error.toString(), Toast.LENGTH_SHORT).show();
-                        loading.setVisibility(View.VISIBLE);
-                        buttonRegister.setVisibility(View.GONE);
+                        Toast.makeText(getApplicationContext(), "Registration failed: ", Toast.LENGTH_SHORT).show();
                     }
                 })
         {
@@ -119,6 +117,6 @@ public class RegisterActivity extends AppCompatActivity {
         };
 
         // Tambahkan request ke queue Volley
-        VolleySingleton.getInstance(this).addToRequestQueue(stringRequest);
+        VolleySingleton.getInstance(this).addToRequestQueue(request);
     }
 }

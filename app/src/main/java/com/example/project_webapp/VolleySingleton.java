@@ -1,4 +1,4 @@
-package com.example.project_webapp.Config;
+package com.example.project_webapp;
 
 import android.content.Context;
 import android.graphics.Bitmap;

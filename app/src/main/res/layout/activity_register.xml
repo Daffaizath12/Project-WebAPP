@@ -69,12 +69,6 @@
             android:paddingTop="5dp"
             android:textSize="14dp" />
 
-        <ProgressBar
-            android:id="@+id/loading"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/startBtn"
             style="@android:style/Widget.Button"

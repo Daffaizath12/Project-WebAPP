@@ -1,24 +1,21 @@
 package com.example.project_webapp;
 
+import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.example.project_webapp.Service.ApiClient;
+import com.example.project_webapp.Service.HTTP.GlobalResponse;
+import com.example.project_webapp.Service.HTTP.RegisterRequest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -26,13 +23,16 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class RegisterActivity extends AppCompatActivity {
 
     private EditText editTextName, editTextEmail, editTextPassword;
     private Button buttonRegister;
-    private ProgressBar loading;
     private  TextView loginBtn;
-    private static String url = "http://localhost/Project-WSI/api/register_api.php";
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,21 +40,20 @@ public class RegisterActivity extends AppCompatActivity {
         setContentView(R.layout.activity_register);
 
         // Inisialisasi view
-        loading = findViewById(R.id.loading);
         editTextEmail = findViewById(R.id.email);
         editTextPassword = findViewById(R.id.password);
         editTextName = findViewById(R.id.username);
         buttonRegister = findViewById(R.id.startBtn);
         loginBtn = findViewById(R.id.loginbtn);
+        context = this.getBaseContext();
 
         // Set listener untuk button register
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //
-                if (v == buttonRegister){
-                    register();
-                }
+
+                register();
+
             }
         });
         loginBtn.setOnClickListener(new View.OnClickListener() {
@@ -66,57 +65,46 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+    public void register(){
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setNama(editTextName.getText().toString());
+        registerRequest.setEmail(editTextEmail.getText().toString());
+        registerRequest.setPassword(editTextPassword.getText().toString());
+        Toast.makeText(context, registerRequest.getEmail(), Toast.LENGTH_SHORT).show();
 
-    private void register() {
-
-        final String email = editTextEmail.getText().toString().trim();
-        final String password = editTextPassword.getText().toString().trim();
-        final String name = editTextName.getText().toString().trim();
-
-        JSONObject jsonObject = new JSONObject();
-        try {
-            jsonObject.put("username", name);
-            jsonObject.put("password", password);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        // Membuat permintaan POST menggunakan Volley
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, jsonObject,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        // Respon berhasil dari server
-                        try {
-                            String success = response.getString("success");
-                            Toast.makeText(RegisterActivity.this, success, Toast.LENGTH_SHORT).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                },
-                new Response.ErrorListener(){
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Handle error dari server saat registrasi gagal
-                        String errorMessage = "Error: " + error.getMessage();
-                        Log.e("TAG_ERROR", errorMessage);
-                        // Misalnya, menampilkan pesan error pada EditText atau menampilkan dialog error
-                        Toast.makeText(getApplicationContext(), "Registration failed: ", Toast.LENGTH_SHORT).show();
-                    }
-                })
-        {
+        Call<GlobalResponse> globalResponseCall = ApiClient.getUserService().userRegister(registerRequest);
+        globalResponseCall.enqueue(new Callback<GlobalResponse>() {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("email", email);
-                params.put("password", password);
-                params.put("name", name);
-                return params;
-            }
-        };
+            public void onResponse(Call<GlobalResponse> call, Response<GlobalResponse> response) {
 
-        // Tambahkan request ke queue Volley
-        VolleySingleton.getInstance(this).addToRequestQueue(request);
+                if (response.isSuccessful()){
+                    GlobalResponse globalResponse = response.body();
+
+                    if (!globalResponse.isError()) {
+                        Toast.makeText(context, globalResponse.getMessage(), Toast.LENGTH_SHORT).show();
+
+                        new Handler().postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                Activity thisActivity = RegisterActivity.this;
+                                thisActivity.finishAfterTransition();
+
+                                Intent intent = new Intent(thisActivity, LoginActivity.class);
+                                startActivity(intent);
+                            }
+                        }, 700);
+                    } else {
+                        Toast.makeText(context, globalResponse.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(context, "Register Gagal.", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GlobalResponse> call, Throwable t) {
+                Toast.makeText(context, "Throwable "+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

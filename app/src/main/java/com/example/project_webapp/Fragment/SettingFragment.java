@@ -1,5 +1,9 @@
 package com.example.project_webapp.Fragment;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,8 +11,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
+import com.example.project_webapp.LoginActivity;
 import com.example.project_webapp.R;
+import com.example.project_webapp.Service.SharedPreference.Preferences;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +32,9 @@ public class SettingFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private RelativeLayout logoutBtn;
+    private View rootview;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -61,6 +71,41 @@ public class SettingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_setting, container, false);
+         rootview = inflater.inflate(R.layout.fragment_setting, container, false);
+
+         logoutBtn = rootview.findViewById(R.id.logoutbutton);
+
+        logoutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(rootview.getContext());
+                builder.setTitle("Konfirmasi Logout");
+                builder.setMessage("Apakah Anda yakin ingin logout?");
+                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // Kode untuk logout
+                        // ...
+
+                        // Kembali ke halaman login
+                        Preferences.clearLoggedInUser(rootview.getContext());
+                        Intent intent = new Intent(getActivity(), LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }
+                });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+
+                AlertDialog dialog = builder.create();
+                dialog.show();
+            }
+        });
+        return rootview;
     }
 }

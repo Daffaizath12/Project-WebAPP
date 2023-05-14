@@ -49,6 +49,9 @@ public class LoginActivity extends AppCompatActivity {
         registerBtn = findViewById(R.id.register_btn);
         context = this.getBaseContext();
         thisActivity = this;
+
+        checkPreferences(false);
+        
         // Set listener untuk button login
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,6 +68,17 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void checkPreferences(boolean finish) {
+        if (Preferences.getLoggedInStatus(getBaseContext())) {
+            if (finish) {
+                finish();
+            } else {
+                Intent intent = new Intent(LoginActivity.this, HomeActivity.class);
+                startActivity(intent);
+            }
+        }
     }
 
     public void login(){

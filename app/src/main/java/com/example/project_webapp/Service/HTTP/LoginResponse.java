@@ -3,11 +3,19 @@ package com.example.project_webapp.Service.HTTP;
 import com.google.gson.annotations.SerializedName;
 
 public class LoginResponse {
-    @SerializedName("error")
-    private boolean error;
+    @SerializedName("success")
+    private boolean success;
 
     @SerializedName("message")
     private String message;
+
+    public boolean isSuccess() {
+        return success;
+    }
+
+    public void setSuccess(boolean success) {
+        this.success = success;
+    }
 
     @SerializedName("id")
     private String id;
@@ -22,14 +30,6 @@ public class LoginResponse {
 
     @SerializedName("data")
     private Data data;
-
-    public boolean isError() {
-        return error;
-    }
-
-    public void setError(boolean error) {
-        this.error = error;
-    }
 
     public String getMessage() {
         return message;

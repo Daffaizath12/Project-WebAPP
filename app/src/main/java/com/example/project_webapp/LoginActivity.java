@@ -95,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (response.isSuccessful()){
                     LoginResponse loginResponse = response.body();
 
-                    if (!loginResponse.isError()) {
+                    if (loginResponse.isSuccess()) {
                         Toast.makeText(context, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
 
                         Preferences.setLoggedInToken(context, loginResponse.getId());

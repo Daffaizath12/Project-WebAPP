@@ -1,21 +1,31 @@
 package com.example.project_webapp.Fragment;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.project_webapp.LoginActivity;
 import com.example.project_webapp.R;
+import com.example.project_webapp.Service.ApiClient;
+import com.example.project_webapp.Service.HTTP.UserResponse;
 import com.example.project_webapp.Service.SharedPreference.Preferences;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.http.GET;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,7 +44,9 @@ public class SettingFragment extends Fragment {
     private String mParam2;
 
     private RelativeLayout logoutBtn;
+    private TextView nama, email;
     private View rootview;
+    private SharedPreferences preferences;
 
     public SettingFragment() {
         // Required empty public constructor
@@ -73,7 +85,15 @@ public class SettingFragment extends Fragment {
         // Inflate the layout for this fragment
          rootview = inflater.inflate(R.layout.fragment_setting, container, false);
 
+         nama = rootview.findViewById(R.id.namaText);
+         email = rootview.findViewById(R.id.emailText);
          logoutBtn = rootview.findViewById(R.id.logoutbutton);
+
+        // Inisialisasi SharedPreferences
+        preferences = PreferenceManager.getDefaultSharedPreferences(rootview.getContext());
+
+
+        getUser();
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -104,6 +124,28 @@ public class SettingFragment extends Fragment {
 
                 AlertDialog dialog = builder.create();
                 dialog.show();
+            }
+        });
+        return rootview;
+    }
+    private View getUser(){
+        Call<UserResponse> userResponseCall = ApiClient.getUserService().userDetail(Preferences.getLoggedInToken(rootview.getContext()));
+        userResponseCall.enqueue(new Callback<UserResponse>() {
+            @Override
+            public void onResponse(Call<UserResponse> call, Response<UserResponse> response) {
+
+                if (response.isSuccessful()){
+                    UserResponse userResponse = response.body();
+                    email.setText(userResponse.getEmail());
+                    nama.setText(userResponse.getName());
+                } else {
+                    Toast.makeText(rootview.getContext(), "Gagal Mengambil Data", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<UserResponse> call, Throwable t) {
+
             }
         });
         return rootview;

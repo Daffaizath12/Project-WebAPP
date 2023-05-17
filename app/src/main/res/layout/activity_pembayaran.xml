@@ -13,35 +13,35 @@
         android:background="@android:color/transparent"
         app:elevation="0dp">
 
-    <androidx.appcompat.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="#1e3d59">
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="#1e3d59">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/backbtn"
-            android:layout_width="50dp"
-            android:layout_height="55dp"
-            app:srcCompat="@drawable/baseline_arrow_back_24"
-            android:padding="12dp"/>
+                <ImageView
+                    android:id="@+id/backbtn"
+                    android:layout_width="50dp"
+                    android:layout_height="55dp"
+                    app:srcCompat="@drawable/baseline_arrow_back_24"
+                    android:padding="12dp"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="50dp"
-            android:text="Pembayaran Rumah"
-            android:textColor="#f5f0e1"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="50dp"
+                    android:text="Pembayaran"
+                    android:textColor="#f5f0e1"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
 
-    </RelativeLayout>
-    </androidx.appcompat.widget.Toolbar>
+            </RelativeLayout>
+        </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
@@ -66,7 +66,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
+                    android:layout_height="280dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -89,7 +89,7 @@
                             android:layout_gravity="center"
                             android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
-                            android:text="Pembayaran DP Rumah "
+                            android:text="Pembayaran DP Rumah"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -105,14 +105,14 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Silahkan Lakukan Pembayaran Ke No.Rekening "
+                            android:text="SIlahkan Lakukan Pembayaran Ke No.Rekening:"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="BRI : 125678909785"
+                            android:text="BRI : 125678909785 :"
                             android:textAlignment="center"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
@@ -131,21 +131,42 @@
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
 
-                        <com.google.android.material.button.MaterialButton
-                            android:id="@+id/btnCheckout"
-                            android:layout_width="wrap_content"
-                            android:layout_height="60dp"
-                            android:layout_margin="30dp"
-                            android:text="Bayar"
-                            android:textAllCaps="false"
-                            android:textColor="@color/white"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
-                            android:theme="@style/Theme.MaterialComponents"
-                            app:backgroundTint="#1e3d59"
-                            app:cornerRadius="50dp"
-                            app:rippleColor="#1e3d59" />
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnCheckout"
+                                android:layout_width="wrap_content"
+                                android:layout_height="60dp"
+                                android:layout_margin="30dp"
+                                android:text="Bayar Sekarang"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                android:textStyle="bold"
+                                android:theme="@style/Theme.MaterialComponents"
+                                app:backgroundTint="#1e3d59"
+                                app:cornerRadius="50dp"
+                                app:rippleColor="#1e3d59" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnCheckout"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_marginTop="30dp"
+                                android:layout_marginEnd="30dp"
+                                android:text="Riwayat Pembayaran"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                android:textStyle="bold"
+                                android:theme="@style/Theme.MaterialComponents"
+                                app:backgroundTint="#1e3d59"
+                                app:cornerRadius="50dp"
+                                app:rippleColor="#1e3d59" />
+                        </LinearLayout>
 
                     </LinearLayout>
                 </LinearLayout>

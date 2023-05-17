@@ -37,8 +37,6 @@ public class PemesananActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pemesanan);
 
-//        initView();
-
         txttanggal = (EditText) findViewById(R.id.txttanggal);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
         txttanggal.setOnClickListener(new View.OnClickListener() {
@@ -61,7 +59,6 @@ public class PemesananActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(PemesananActivity.this, "item: " + item, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -69,16 +66,10 @@ public class PemesananActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 String item = adapterView.getItemAtPosition(i).toString();
-                Toast.makeText(PemesananActivity.this, "item: " + item, Toast.LENGTH_SHORT).show();
             }
         });
 
     }
-
-//    private void initView() {
-//        backbtn = findViewById(R.id.backbtn);
-//        backbtn.setOnClickListener(view -> startActivity(new Intent(PemesananActivity.this, DetailActivity.class)));
-//    }
 
     private void showDateDialog() {
         Calendar calendar = Calendar.getInstance();

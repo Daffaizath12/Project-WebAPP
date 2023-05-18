@@ -1,9 +1,13 @@
 package com.example.project_webapp;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.DatePickerDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -30,7 +34,8 @@ public class PemesananActivity extends AppCompatActivity {
     DatePickerDialog datePickerDialog;
     SimpleDateFormat dateFormatter;
 
-//    ImageView backbtn;
+    private static final int REQUEST_GALLERY = 1;
+    private static final int REQUEST_CAMERA = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,5 +88,49 @@ public class PemesananActivity extends AppCompatActivity {
             }
         }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.show();
+    }
+
+    public void showOptionsDialog(View view) {
+        String[] options = {"Upload Gambar", "Ambil Foto"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Pilih Opsi");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0) {
+                    openGallery();
+                } else if (which == 1) {
+                    openCamera();
+                }
+            }
+        });
+        builder.show();
+    }
+    private void openGallery() {
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, REQUEST_GALLERY);
+    }
+
+    private void openCamera() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(intent, REQUEST_CAMERA);
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_GALLERY) {
+                Uri selectedImageUri = data.getData();
+                // Lakukan tindakan yang sesuai dengan gambar yang dipilih dari galeri
+                Toast.makeText(this, "Gambar berhasil dipilih dari galeri", Toast.LENGTH_SHORT).show();
+            } else if (requestCode == REQUEST_CAMERA) {
+                // Ambil gambar yang diambil dari kamera
+                Toast.makeText(this, "Foto berhasil diambil", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 }

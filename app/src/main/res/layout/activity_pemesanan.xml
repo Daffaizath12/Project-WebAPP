@@ -36,6 +36,7 @@
                     android:layout_centerInParent="true"
                     android:layout_marginStart="50dp"
                     android:text="Pemesanan Rumah"
+                    android:fontFamily="@font/poppinssemibold"
                     android:textColor="#f5f0e1"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -92,13 +93,14 @@
                             android:layout_marginEnd="20dp"
                             android:text="Mohon isi data dibawah ini sesuai dengan KTP Anda"
                             android:textColor="@color/white"
+                            android:fontFamily="@font/poppinsregular"
                             android:textSize="18sp" />
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="372dp"
                         android:layout_marginStart="20dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginEnd="20dp"
@@ -108,6 +110,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Nama Lengkap"
+                            android:fontFamily="@font/poppinsmedium"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
 
@@ -127,6 +130,7 @@
                             android:layout_height="wrap_content"
                             android:text="Alamat"
                             android:textColor="@color/black"
+                            android:fontFamily="@font/poppinsmedium"
                             android:textSize="14sp" />
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -145,6 +149,7 @@
                             android:layout_height="wrap_content"
                             android:text="Nomor Telp / HP"
                             android:textColor="@color/black"
+                            android:fontFamily="@font/poppinsmedium"
                             android:textSize="14sp" />
 
                         <com.google.android.material.textfield.TextInputEditText
@@ -175,7 +180,7 @@
 
                         <LinearLayout
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
                             <com.google.android.material.textfield.TextInputLayout
@@ -198,20 +203,37 @@
                                 android:id="@+id/txttanggal"
                                 android:layout_width="120dp"
                                 android:layout_height="wrap_content"
-                                android:focusable="false"
-                                android:text="Tanggal"
                                 android:drawableEnd="@drawable/date"
+                                android:focusable="false"
+                                android:hint="Tanggal"
                                 android:textAlignment="center"
-                                android:textSize="12sp"/>
+                                android:textSize="12sp" />
 
                         </LinearLayout>
-                        <EditText
-                            android:id="@+id/uploadfile"
+
+                        <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:drawableStart="@drawable/uplaod"
-                            android:hint="Upload File KTP disini" />
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                android:src="@drawable/uplaod" />
+
+                            <Button
+                                android:id="@+id/btnUpload"
+                                android:layout_width="203dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:onClick="showOptionsDialog"
+                                android:text="Upload Gambar"
+                                android:fontFamily="@font/poppinsmedium"
+                                android:textColor="@color/btn"
+                                android:backgroundTint="@color/white"/>
+
+                        </LinearLayout>
                     </LinearLayout>
 
                 </LinearLayout>

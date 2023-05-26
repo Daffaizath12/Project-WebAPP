@@ -76,13 +76,6 @@
                         android:orientation="horizontal">
 
 
-                        <ImageView
-                            android:layout_width="30dp"
-                            android:layout_height="30dp"
-                            android:layout_gravity="center"
-                            android:layout_marginStart="20dp"
-                            android:src="@drawable/person" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -90,6 +83,116 @@
                             android:layout_marginStart="20dp"
                             android:layout_marginEnd="20dp"
                             android:text="Pembayaran DP Rumah"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"/>
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="SIlahkan Lakukan Pembayaran Ke No.Rekening:"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="BRI : 125678909785 :"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="BNI : 876549065489"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="BCA : 8965498753567"
+                            android:textAlignment="center"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnBayar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="60dp"
+                                android:layout_margin="30dp"
+                                android:text="Bayar Sekarang"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                android:textStyle="bold"
+                                android:theme="@style/Theme.MaterialComponents"
+                                app:backgroundTint="#1e3d59"
+                                app:cornerRadius="50dp"
+                                app:rippleColor="#1e3d59" />
+
+                            <com.google.android.material.button.MaterialButton
+                                android:id="@+id/btnRiwayat"
+                                android:layout_width="match_parent"
+                                android:layout_height="60dp"
+                                android:layout_marginTop="24dp"
+                                android:layout_marginEnd="30dp"
+                                android:text="Riwayat Pembayaran"
+                                android:textAllCaps="false"
+                                android:textColor="@color/white"
+                                android:textSize="10sp"
+                                android:textStyle="bold"
+                                android:theme="@style/Theme.MaterialComponents"
+                                app:backgroundTint="#1e3d59"
+                                app:cornerRadius="50dp"
+                                app:rippleColor="#1e3d59" />
+                        </LinearLayout>
+
+
+
+
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="280dp"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="60dp"
+                        android:background="#1e3d59"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:layout_marginStart="20dp"
+                            android:layout_marginEnd="20dp"
+                            android:text="Pembayaran InHouse"
                             android:textColor="@color/white"
                             android:textSize="18sp" />
 
@@ -137,7 +240,7 @@
                             android:orientation="horizontal">
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnCheckout"
+                                android:id="@+id/btnBayar"
                                 android:layout_width="wrap_content"
                                 android:layout_height="60dp"
                                 android:layout_margin="30dp"
@@ -152,10 +255,10 @@
                                 app:rippleColor="#1e3d59" />
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnCheckout"
+                                android:id="@+id/btnRiwayat"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
-                                android:layout_marginTop="30dp"
+                                android:layout_marginTop="24dp"
                                 android:layout_marginEnd="30dp"
                                 android:text="Riwayat Pembayaran"
                                 android:textAllCaps="false"
@@ -167,6 +270,9 @@
                                 app:cornerRadius="50dp"
                                 app:rippleColor="#1e3d59" />
                         </LinearLayout>
+
+
+
 
                     </LinearLayout>
                 </LinearLayout>

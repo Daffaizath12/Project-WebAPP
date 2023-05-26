@@ -27,8 +27,10 @@ public class PemesananActivity extends AppCompatActivity {
 
     String[] item = {"Pinewood", "Boulevard Magnolia", "Camelia", "Edge Gardenia", "New Edge Gardenia", "Plumeria", "QBIX", "Ruko", "SOHO"};
     String[] item2 = {"InHouse", "KPR"};
-    AutoCompleteTextView autoCompleteTextView, pembayaran;
-    ArrayAdapter<String> adapterItem, adapterItemPembayaran;
+    String[] item3 = {"InHouse", "KPR"};
+    String[] item4 = {"InHouse", "KPR"};
+    AutoCompleteTextView autoCompleteTextView, pembayaran, dp, inhouse;
+    ArrayAdapter<String> adapterItem, adapterItemPembayaran, getAdapterItemdp, getAdapterIteminhouse;
 
     EditText txttanggal;
     DatePickerDialog datePickerDialog;
@@ -60,6 +62,14 @@ public class PemesananActivity extends AppCompatActivity {
         adapterItemPembayaran = new ArrayAdapter<String>(this,R.layout.list_cluster, item2);
         pembayaran.setAdapter(adapterItemPembayaran);
 
+        dp = findViewById(R.id.uangmuka);
+        getAdapterItemdp = new ArrayAdapter<String>(this,R.layout.list_cluster, item3);
+        dp.setAdapter(getAdapterItemdp);
+
+        inhouse = findViewById(R.id.inhouse);
+        getAdapterIteminhouse = new ArrayAdapter<String>(this,R.layout.list_cluster, item4);
+        inhouse.setAdapter(getAdapterIteminhouse);
+
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
@@ -73,7 +83,19 @@ public class PemesananActivity extends AppCompatActivity {
                 String item = adapterView.getItemAtPosition(i).toString();
             }
         });
+        dp.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+            }
+        });
 
+        inhouse.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String item = adapterView.getItemAtPosition(i).toString();
+            }
+        });
     }
 
     private void showDateDialog() {

@@ -83,24 +83,15 @@ public class ClusterFragment extends Fragment {
     private void initRecycleView() {
         ArrayList<ItemsDomain> ItemsArrayList = new ArrayList<>();
 
-        ItemsArrayList.add(new ItemsDomain("House with a greate view", "San Frasisco, CA 94110", "This 2 Bed /1 bath home boasts an enormous, \n" +
-                "open-living plan, accented by striking \n"+
-                "Architectural features and high-end finishes \n" +
-                "Feel inspired by open sight line thats \n" +
-                "embrace the outdoors, crowned by stunning \n" +
-                "coffered ceilings. ", 2,1, 1950000,"pic1", true));
-        ItemsArrayList.add(new ItemsDomain("House with a greate view", "San Frasisco, CA 94110", "This 2 Bed /1 bath home boasts an enormous, \n" +
-                "open-living plan, accented by striking \n"+
-                "Architectural features and high-end finishes \n" +
-                "Feel inspired by open sight line thats \n" +
-                "embrace the outdoors, crowned by stunning \n" +
-                "coffered ceilings. ", 3,1, 2950000,"pic2", false));
-        ItemsArrayList.add(new ItemsDomain("House with a greate view", "San Frasisco, CA 94110", "This 2 Bed /1 bath home boasts an enormous, \n" +
-                "open-living plan, accented by striking \n"+
-                "Architectural features and high-end finishes \n" +
-                "Feel inspired by open sight line thats \n" +
-                "embrace the outdoors, crowned by stunning \n" +
-                "coffered ceilings. ", 3,1, 3950000,"pic2", false));
+        ItemsArrayList.add(new ItemsDomain("New Edge Gardenia", "Menerus batu kali", "Pasangan batadi plaster Finish cat + Plamir dicat",
+                "Rangka galvalum, Penutup genteng flat beton dicat","alumunium", "Rangka Hallow", "PDAM", "PLN 1300 watt",
+                "2 kamar tidur", "60 m�",80000000,"pic1"));
+        ItemsArrayList.add(new ItemsDomain("New Edge Gardenia", "Menerus batu kali", "Pasangan batadi plaster Finish cat + Plamir dicat",
+                "Rangka galvalum, Penutup genteng flat beton dicat","alumunium", "Rangka Hallow", "PDAM", "PLN 1300 watt",
+                "2 kamar tidur", "60 m�",80000000,"pic2"));
+        ItemsArrayList.add(new ItemsDomain("New Edge Gardenia", "Menerus batu kali", "Pasangan batadi plaster Finish cat + Plamir dicat",
+                "Rangka galvalum, Penutup genteng flat beton dicat","alumunium", "Rangka Hallow", "PDAM", "PLN 1300 watt",
+                "2 kamar tidur", "60 m�",80000000,"pic2"));
 
         recyclerViewall = rootView.findViewById(R.id.viewall);
         recyclerViewBoulevard = rootView.findViewById(R.id.viewBoulevard);

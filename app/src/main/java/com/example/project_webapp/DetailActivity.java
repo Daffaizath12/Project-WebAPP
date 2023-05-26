@@ -14,7 +14,7 @@ import com.bumptech.glide.Glide;
 import com.example.project_webapp.Adapter.ItemsDomain;
 
 public class DetailActivity extends AppCompatActivity {
-    private TextView titleTxt, addressTxt, bedTxt, bathTxt, wifiTxt, descriptionTxt, priceTxt;
+    private TextView titleTxt, pondasiTxt, dindingTxt, rangkaatapTxt, kusenTxt, plafondTxt, airTxt, listrikTxt, jumlahkamarTxt, luastanahTxt, priceTxt;
     private ItemsDomain item;
     private ImageView pic;
     private Button buyBtn;
@@ -35,17 +35,18 @@ public class DetailActivity extends AppCompatActivity {
         item = (ItemsDomain) getIntent().getSerializableExtra("object");
 
         titleTxt.setText(item.getTitle());
-        addressTxt.setText(item.getAddress());
-        bedTxt.setText(item.getBed()+ "bed");
-        bathTxt.setText(item.getBath()+ "bath");
-        descriptionTxt.setText(item.getDescription());
+        pondasiTxt.setText(item.getPondasi());
+        dindingTxt.setText(item.getDinding());
+        rangkaatapTxt.setText(item.getRangkaatap());
+        kusenTxt.setText(item.getKusen());
+        plafondTxt.setText(item.getPlafond());
+        airTxt.setText(item.getAir());
+        listrikTxt.setText(item.getListrik());
+        jumlahkamarTxt.setText(item.getJumlahkamar());
+        luastanahTxt.setText(item.getLuastanah());
         priceTxt.setText("Rp" + formatter.format(item.getPrice()));
 
-        if(item.isWifi()){
-            wifiTxt.setText("wifi");
-        }else{
-            wifiTxt.setText("No-Wifi");
-        }
+
         int drawableResourceId = getResources().getIdentifier(item.getPic(), "drawable", getPackageName());
 
         Glide.with(this)
@@ -55,11 +56,15 @@ public class DetailActivity extends AppCompatActivity {
 
     private void initView() {
         titleTxt = findViewById(R.id.titleTxt);
-        addressTxt = findViewById(R.id.addressTxt);
-        bedTxt = findViewById(R.id.bedTxt);
-        bathTxt = findViewById(R.id.bathTxt);
-        wifiTxt = findViewById(R.id.wifiTxt);
-        descriptionTxt = findViewById(R.id.descriptionTxt);
+        pondasiTxt = findViewById(R.id.pondasiTxt);
+        dindingTxt = findViewById(R.id.dindingTxt);
+        rangkaatapTxt = findViewById(R.id.rangkaatapTxt);
+        kusenTxt = findViewById(R.id.kusenTxt);
+        plafondTxt = findViewById(R.id.plafonTxt);
+        airTxt = findViewById(R.id.airTxt);
+        listrikTxt = findViewById(R.id.listrikTxt);
+        jumlahkamarTxt = findViewById(R.id.kamarTxt);
+        luastanahTxt = findViewById(R.id.tanahTxt);
         pic = findViewById(R.id.pic);
         priceTxt = findViewById(R.id.priceTxt);
 

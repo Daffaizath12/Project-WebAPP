@@ -26,7 +26,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 
     public ItemsAdapter(ArrayList<ItemsDomain> items) {
         this.items = items;
-        formatter = new DecimalFormat("###,###,###,###.##");
     }
 
     @NonNull
@@ -39,9 +38,6 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.titleTxt.setText(items.get(position).getTitle());
-        holder.addressTxt.setText(items.get(position).getAddress());
-        holder.priceTxt.setText("Rp" + formatter.format(items.get(position).getPrice()));
 
         int drawableResourceId = holder.itemView.getResources().getIdentifier(items.get(position).getPic(),"drawable", holder.itemView.getContext().getPackageName());
         Glide.with(holder.itemView.getContext())
@@ -62,14 +58,10 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-        TextView titleTxt, addressTxt, priceTxt;
         ImageView pic;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            titleTxt = itemView.findViewById(R.id.titleTxt);
-            addressTxt = itemView.findViewById(R.id.addressTxt);
-            priceTxt = itemView.findViewById(R.id.priceTxt);
             pic = itemView.findViewById(R.id.pic);
 
         }

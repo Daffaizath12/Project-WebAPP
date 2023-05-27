@@ -1,5 +1,7 @@
 package com.example.project_webapp.Service;
 
+import android.content.Context;
+
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -16,7 +18,7 @@ public class ApiClient {
 
         Retrofit retrofit = new Retrofit.Builder()
                 .addConverterFactory(GsonConverterFactory.create())
-                .baseUrl("http://192.168.1.12/Project-WSI/api/")
+                .baseUrl(getBaseUrl()+"/api/")
                 .client(okHttpClient)
                 .build();
 
@@ -28,5 +30,15 @@ public class ApiClient {
         UserService userService = getRetrofit().create(UserService.class);
 
         return userService;
+    }
+
+    public static DetailService getDetailService(Context detailActivity) {
+        DetailService detailService = getRetrofit().create(DetailService.class);
+
+        return detailService;
+    }
+
+    public static String getBaseUrl(){
+        return "http://192.168.1.12/Project-WSI";
     }
 }

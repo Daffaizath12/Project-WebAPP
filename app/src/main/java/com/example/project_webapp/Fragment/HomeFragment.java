@@ -1,23 +1,30 @@
 package com.example.project_webapp.Fragment;
 
-import android.graphics.Color;
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.RelativeLayout;
+import android.widget.Toast;
 
-import com.example.project_webapp.Adapter.ItemsAdapter;
-import com.example.project_webapp.Adapter.ItemsDomain;
+import com.example.project_webapp.Adapter.ClusterAdapter;
+import com.example.project_webapp.Adapter.ClusterData;
 import com.example.project_webapp.R;
+import com.example.project_webapp.Service.ApiClient;
+import com.example.project_webapp.Service.HTTP.ClusterResponse;
 
-import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,9 +42,7 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private View rootView;
-    private RecyclerView.Adapter adapterPopuler,adapterNew;
-    private RecyclerView recyclerViewPopuler, recyclerViewNew;
+    private View rootview;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -74,36 +79,76 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        rootview = inflater.inflate(R.layout.fragment_home, container, false);
 
-        initRecycleView();
+        RecyclerView recyclerViewall = rootview.findViewById(R.id.viewNew);
+        RecyclerView recyclerViewpopuler = rootview.findViewById(R.id.viewPopuler);
+        recyclerViewall.setHasFixedSize(true);
+        recyclerViewall.setLayoutManager(new LinearLayoutManager(rootview.getContext(),LinearLayoutManager.HORIZONTAL, false));
 
-        return rootView;
+        recyclerViewpopuler.setHasFixedSize(true);
+        recyclerViewpopuler.setLayoutManager(new LinearLayoutManager(rootview.getContext(),LinearLayoutManager.HORIZONTAL, false));
+
+        getCluster(recyclerViewall);
+        getCluster(recyclerViewpopuler);
+
+        return rootview;
     }
 
-    private void initRecycleView() {
-        ArrayList<ItemsDomain> ItemsArrayList = new ArrayList<>();
+    private void getCluster(RecyclerView recyclerView) {
+        Call<ClusterResponse> clusterResponseCall = ApiClient.getDetailService(rootview.getContext()).getCluster();
+        clusterResponseCall.enqueue(new Callback<ClusterResponse>() {
+            @Override
+            public void onResponse(Call<ClusterResponse> call, Response<ClusterResponse> response) {
 
-        ItemsArrayList.add(new ItemsDomain("New Edge Gardenia", "Menerus batu kali", "Pasangan batadi plaster Finish cat + Plamir dicat",
-                "Rangka galvalum, Penutup genteng flat beton dicat","alumunium", "Rangka Hallow", "PDAM", "PLN 1300 watt",
-                "2 kamar tidur", "60 m�",80000000,"pic1"));
-        ItemsArrayList.add(new ItemsDomain("New Edge Gardenia", "Menerus batu kali", "Pasangan batadi plaster Finish cat + Plamir dicat",
-                "Rangka galvalum, Penutup genteng flat beton dicat","alumunium", "Rangka Hallow", "PDAM", "PLN 1300 watt",
-                "2 kamar tidur", "60 m�",80000000,"pic2"));
-        ItemsArrayList.add(new ItemsDomain("New Edge Gardenia", "Menerus batu kali", "Pasangan batadi plaster Finish cat + Plamir dicat",
-                "Rangka galvalum, Penutup genteng flat beton dicat","alumunium", "Rangka Hallow", "PDAM", "PLN 1300 watt",
-                "2 kamar tidur", "60 m�",80000000,"pic2"));
+                if (response.isSuccessful()){
+                    ClusterResponse clusterResponse = response.body();
+                    if (clusterResponse != null) {
+                        List<ClusterResponse.Data> dataList = clusterResponse.getData();
 
-        recyclerViewPopuler = rootView.findViewById(R.id.viewPopuler);
-        recyclerViewNew = rootView.findViewById(R.id.viewNew);
+                        // Mengubah List menjadi array ArticleData[]
+                        ClusterData[] articleData = new ClusterData[dataList.size()];
 
-        recyclerViewPopuler.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewNew.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
+                        for (int i = 0; i < dataList.size(); i++) {
+                            ClusterResponse.Data data = dataList.get(i);
 
-        adapterNew = new ItemsAdapter(ItemsArrayList);
-        adapterPopuler = new ItemsAdapter(ItemsArrayList);
+                            // Ambil data yang diperlukan dari objek data
+                            int id = data.getId();
+                            String pondasi = data.getPondasi();
+                            String dinding = data.getDinding();
+                            String rangkaatap = data.getRangkaatap();
+                            String kusen = data.getKusen();
+                            String plafond = data.getPlafond();
+                            String air = data.getAir();
+                            String listrik = data.getListrik();
+                            String jumlahkamar = data.getJumlahkamar();
+                            String luastanah = data.getLuastanah();
+                            String fotocluster = data.getFotocluster();
+                            String harga = data.getHarga();
+                            String namacluster = data.getNamacluster();
 
-        recyclerViewPopuler.setAdapter(adapterPopuler);
-        recyclerViewNew.setAdapter(adapterNew);
+                            // Buat objek ArticleData dan tambahkan ke array
+                            articleData[i] = new ClusterData(id, pondasi, dinding, rangkaatap, kusen, plafond, air, listrik, jumlahkamar, luastanah,
+                                    ApiClient.getBaseUrl()+"/img/images_cluster/"+fotocluster, harga, namacluster);
+                        }
+
+                        // Tambahkan kode untuk melakukan sesuatu dengan articleData, seperti mengatur adapter RecyclerView
+                        ClusterAdapter clusterAdapter = new ClusterAdapter(articleData, rootview.getContext());
+                        recyclerView.setAdapter(clusterAdapter);
+                    } else {
+                        Toast.makeText(rootview.getContext(), "Data Kosong", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(rootview.getContext(), "Gagal Mengambil Data", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ClusterResponse> call, Throwable t) {
+
+                String errorMessage = t.getMessage();
+                Log.e(TAG, "onFailure: "+t.getMessage());
+            }
+        });
     }
 }

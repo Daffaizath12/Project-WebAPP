@@ -3,12 +3,10 @@ package com.example.project_webapp.Adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.icu.text.DecimalFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,37 +14,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.project_webapp.DetailActivity;
 import com.example.project_webapp.R;
+import com.example.project_webapp.Service.HTTP.ClusterResponse;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> {
-    ArrayList<ItemsDomain> items;
-    android.icu.text.DecimalFormat formatter;
+public class ClusterAdapter extends RecyclerView.Adapter<ClusterAdapter.ViewHolder> {
+    ClusterData[] clusterData;
     Context context;
 
-    public ItemsAdapter(ArrayList<ItemsDomain> items) {
-        this.items = items;
+    public ClusterAdapter(ClusterData[] clusterData, Context context) {
+        this.clusterData = clusterData;
+        this.context = context;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_viewholder, parent, false);
-        context = parent.getContext();
-        return new ViewHolder(inflate);
+        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
+        View view = layoutInflater.inflate(R.layout.item_viewholder,parent,false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
-        int drawableResourceId = holder.itemView.getResources().getIdentifier(items.get(position).getPic(),"drawable", holder.itemView.getContext().getPackageName());
-        Glide.with(holder.itemView.getContext())
-                .load(drawableResourceId)
-                .into(holder.pic);
+        final Context context = holder.itemView.getContext();
+        final ClusterData clusterDatalist = clusterData[position];
+        Picasso.get().load(clusterDatalist.getFotocluster()).into(holder.pic);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("object", items.get(position));
+            intent.putExtra("idcluster", String.valueOf(clusterDatalist.getId()));
             context.startActivity(intent);
         });
 
@@ -54,7 +54,7 @@ public class ItemsAdapter extends RecyclerView.Adapter<ItemsAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return clusterData.length;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{

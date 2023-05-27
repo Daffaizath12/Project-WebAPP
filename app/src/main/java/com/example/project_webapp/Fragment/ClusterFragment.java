@@ -1,20 +1,31 @@
 package com.example.project_webapp.Fragment;
 
+import static android.content.ContentValues.TAG;
+
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
-import com.example.project_webapp.Adapter.ItemsAdapter;
-import com.example.project_webapp.Adapter.ItemsDomain;
+import com.example.project_webapp.Adapter.ClusterAdapter;
+import com.example.project_webapp.Adapter.ClusterData;
 import com.example.project_webapp.R;
+import com.example.project_webapp.Service.ApiClient;
+import com.example.project_webapp.Service.HTTP.ClusterResponse;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -32,12 +43,7 @@ public class ClusterFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private View rootView;
-
-    private RecyclerView.Adapter adapterAll, adapterBoulevard, adapterCamelia, adapterEdge, adapterNewedge, adapterPinewood, adapterPlumeria, adapterQbix, adapterRuko, adapterSoho;
-
-    private RecyclerView recyclerViewall, recyclerViewBoulevard, recyclerViewCamelia, recyclerViewEdge, recyclerViewNewedge, recyclerViewPinewood, recyclerViewPlumeria, recyclerViewQbix, recyclerViewRuko, recyclerViewSoho;
-
+    private View rootview;
     public ClusterFragment() {
         // Required empty public constructor
     }
@@ -73,71 +79,109 @@ public class ClusterFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        rootView = inflater.inflate(R.layout.fragment_cluster, container, false);
+        rootview = inflater.inflate(R.layout.fragment_cluster, container, false);
 
-        initRecycleView();
+        RecyclerView recyclerViewall = rootview.findViewById(R.id.viewall);
+        RecyclerView recyclerViewBoulevard = rootview.findViewById(R.id.viewBoulevard);
+        RecyclerView recyclerViewCamelia = rootview.findViewById(R.id.viewCamelia);
+        RecyclerView recyclerViewEdge = rootview.findViewById(R.id.viewEdge);
+        RecyclerView recyclerViewNewedge = rootview.findViewById(R.id.viewNewedge);
+        RecyclerView recyclerViewPinewood = rootview.findViewById(R.id.biewPinewood);
+        RecyclerView recyclerViewPlumeria = rootview.findViewById(R.id.viewPlumeria);
+        RecyclerView recyclerViewQbix = rootview.findViewById(R.id.viewQbix);
+        RecyclerView recyclerViewRuko = rootview.findViewById(R.id.viewRuko);
+        RecyclerView recyclerViewSoho = rootview.findViewById(R.id.viewSoho);
 
-        return rootView;
+        recyclerViewall.setHasFixedSize(true);
+        recyclerViewBoulevard.setHasFixedSize(true);
+        recyclerViewCamelia.setHasFixedSize(true);
+        recyclerViewEdge.setHasFixedSize(true);
+        recyclerViewNewedge.setHasFixedSize(true);
+        recyclerViewPinewood.setHasFixedSize(true);
+        recyclerViewPlumeria.setHasFixedSize(true);
+        recyclerViewQbix.setHasFixedSize(true);
+        recyclerViewRuko.setHasFixedSize(true);
+        recyclerViewSoho.setHasFixedSize(true);
+
+        recyclerViewall.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewBoulevard.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewCamelia.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewEdge.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewNewedge.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewPinewood.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewPlumeria.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewQbix.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewRuko.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewSoho.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
+
+        getCluster(recyclerViewall);
+        getCluster(recyclerViewBoulevard);
+        getCluster(recyclerViewCamelia);
+        getCluster(recyclerViewEdge);
+        getCluster(recyclerViewNewedge);
+        getCluster(recyclerViewPinewood);
+        getCluster(recyclerViewPlumeria);
+        getCluster(recyclerViewQbix);
+        getCluster(recyclerViewRuko);
+        getCluster(recyclerViewSoho);
+
+        return rootview;
     }
 
-    private void initRecycleView() {
-        ArrayList<ItemsDomain> ItemsArrayList = new ArrayList<>();
+    private void getCluster(RecyclerView recyclerView) {
+        Call<ClusterResponse> clusterResponseCall = ApiClient.getDetailService(rootview.getContext()).getCluster();
+        clusterResponseCall.enqueue(new Callback<ClusterResponse>() {
+            @Override
+            public void onResponse(Call<ClusterResponse> call, Response<ClusterResponse> response) {
 
-        ItemsArrayList.add(new ItemsDomain("New Edge Gardenia", "Menerus batu kali", "Pasangan batadi plaster Finish cat + Plamir dicat",
-                "Rangka galvalum, Penutup genteng flat beton dicat","alumunium", "Rangka Hallow", "PDAM", "PLN 1300 watt",
-                "2 kamar tidur", "60 m�",80000000,"pic1"));
-        ItemsArrayList.add(new ItemsDomain("New Edge Gardenia", "Menerus batu kali", "Pasangan batadi plaster Finish cat + Plamir dicat",
-                "Rangka galvalum, Penutup genteng flat beton dicat","alumunium", "Rangka Hallow", "PDAM", "PLN 1300 watt",
-                "2 kamar tidur", "60 m�",80000000,"pic2"));
-        ItemsArrayList.add(new ItemsDomain("New Edge Gardenia", "Menerus batu kali", "Pasangan batadi plaster Finish cat + Plamir dicat",
-                "Rangka galvalum, Penutup genteng flat beton dicat","alumunium", "Rangka Hallow", "PDAM", "PLN 1300 watt",
-                "2 kamar tidur", "60 m�",80000000,"pic2"));
+                if (response.isSuccessful()){
+                    ClusterResponse clusterResponse = response.body();
+                    if (clusterResponse != null) {
+                        List<ClusterResponse.Data> dataList = clusterResponse.getData();
 
-        recyclerViewall = rootView.findViewById(R.id.viewall);
-        recyclerViewBoulevard = rootView.findViewById(R.id.viewBoulevard);
-        recyclerViewCamelia = rootView.findViewById(R.id.viewCamelia);
-        recyclerViewEdge = rootView.findViewById(R.id.viewEdge);
-        recyclerViewNewedge = rootView.findViewById(R.id.viewNewedge);
-        recyclerViewPinewood = rootView.findViewById(R.id.biewPinewood);
-        recyclerViewPlumeria = rootView.findViewById(R.id.viewPlumeria);
-        recyclerViewQbix = rootView.findViewById(R.id.viewQbix);
-        recyclerViewRuko = rootView.findViewById(R.id.viewRuko);
-        recyclerViewSoho = rootView.findViewById(R.id.viewSoho);
+                        // Mengubah List menjadi array ArticleData[]
+                        ClusterData[] articleData = new ClusterData[dataList.size()];
 
-        recyclerViewall.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewBoulevard.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewCamelia.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewEdge.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewNewedge.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewPinewood.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewPlumeria.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewQbix.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewRuko.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewSoho.setLayoutManager(new LinearLayoutManager(rootView.getContext(), LinearLayoutManager.HORIZONTAL, false));
+                        for (int i = 0; i < dataList.size(); i++) {
+                            ClusterResponse.Data data = dataList.get(i);
 
+                            // Ambil data yang diperlukan dari objek data
+                            int id = data.getId();
+                            String pondasi = data.getPondasi();
+                            String dinding = data.getDinding();
+                            String rangkaatap = data.getRangkaatap();
+                            String kusen = data.getKusen();
+                            String plafond = data.getPlafond();
+                            String air = data.getAir();
+                            String listrik = data.getListrik();
+                            String jumlahkamar = data.getJumlahkamar();
+                            String luastanah = data.getLuastanah();
+                            String fotocluster = data.getFotocluster();
+                            String harga = data.getHarga();
+                            String namacluster = data.getNamacluster();
 
-        adapterAll = new ItemsAdapter(ItemsArrayList);
-        adapterBoulevard = new ItemsAdapter(ItemsArrayList);
-        adapterCamelia = new ItemsAdapter(ItemsArrayList);
-        adapterEdge = new ItemsAdapter(ItemsArrayList);
-        adapterNewedge = new ItemsAdapter(ItemsArrayList);
-        adapterPinewood = new ItemsAdapter(ItemsArrayList);
-        adapterPlumeria = new ItemsAdapter(ItemsArrayList);
-        adapterQbix = new ItemsAdapter(ItemsArrayList);
-        adapterRuko = new ItemsAdapter(ItemsArrayList);
-        adapterSoho = new ItemsAdapter(ItemsArrayList);
+                            // Buat objek ArticleData dan tambahkan ke array
+                            articleData[i] = new ClusterData(id, pondasi, dinding, rangkaatap, kusen, plafond, air, listrik, jumlahkamar, luastanah,
+                                    ApiClient.getBaseUrl()+"/img/images_cluster/"+fotocluster, harga, namacluster);
+                        }
 
+                        // Tambahkan kode untuk melakukan sesuatu dengan articleData, seperti mengatur adapter RecyclerView
+                        ClusterAdapter clusterAdapter = new ClusterAdapter(articleData, rootview.getContext());
+                        recyclerView.setAdapter(clusterAdapter);
+                    } else {
+                        Toast.makeText(rootview.getContext(), "Data Kosong", Toast.LENGTH_SHORT).show();
+                    }
+                } else {
+                    Toast.makeText(rootview.getContext(), "Gagal Mengambil Data", Toast.LENGTH_SHORT).show();
+                }
+            }
 
-        recyclerViewall.setAdapter(adapterAll);
-        recyclerViewBoulevard.setAdapter(adapterBoulevard);
-        recyclerViewCamelia.setAdapter(adapterCamelia);
-        recyclerViewEdge.setAdapter(adapterEdge);
-        recyclerViewNewedge.setAdapter(adapterNewedge);
-        recyclerViewPinewood.setAdapter(adapterPinewood);
-        recyclerViewPlumeria.setAdapter(adapterPlumeria);
-        recyclerViewQbix.setAdapter(adapterQbix);
-        recyclerViewRuko.setAdapter(adapterRuko);
-        recyclerViewSoho.setAdapter(adapterSoho);
+            @Override
+            public void onFailure(Call<ClusterResponse> call, Throwable t) {
 
+                String errorMessage = t.getMessage();
+                Log.e(TAG, "onFailure: "+t.getMessage());
+            }
+        });
     }
 }

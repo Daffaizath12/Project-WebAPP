@@ -1,15 +1,22 @@
-package com.example.project_webapp.Adapter;
+package com.example.project_webapp.Service.HTTP;
 
-import java.io.Serializable;
-
-public class ItemsDomain implements Serializable {
-    private String title;
+public class DetailResponse {
+    private int id;
     private String pondasi;
     private String dinding;
     private String rangkaatap;
     private String kusen;
     private String plafond;
     private String air;
+    private String listrik;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getPondasi() {
         return pondasi;
@@ -83,49 +90,33 @@ public class ItemsDomain implements Serializable {
         this.luastanah = luastanah;
     }
 
-    private String listrik;
+    public String getFotocluster() {
+        return fotocluster;
+    }
+
+    public void setFotocluster(String fotocluster) {
+        this.fotocluster = fotocluster;
+    }
+
+    public String getHarga() {
+        return harga;
+    }
+
+    public void setHarga(String harga) {
+        this.harga = harga;
+    }
+
+    public String getNamacluster() {
+        return namacluster;
+    }
+
+    public void setNamacluster(String namacluster) {
+        this.namacluster = namacluster;
+    }
+
     private String jumlahkamar;
     private String luastanah;
-    private int price;
-    private String pic;
-
-    public ItemsDomain(String title, String pondasi, String dinding, String rangkaatap, String kusen, String plafond, String air, String listrik, String jumlahkamar, String luastanah, int price, String pic) {
-        this.title = title;
-        this.pondasi = pondasi;
-        this.dinding = dinding;
-        this.rangkaatap = rangkaatap;
-        this.kusen = kusen;
-        this.plafond = plafond;
-        this.air = air;
-        this.listrik = listrik;
-        this.jumlahkamar = jumlahkamar;
-        this.luastanah = luastanah;
-        this.price = price;
-        this.pic = pic;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public String getPic() {
-        return pic;
-    }
-
-    public void setPic(String pic) {
-        this.pic = pic;
-    }
+    private String fotocluster;
+    private String harga;
+    private String namacluster;
 }

@@ -124,6 +124,7 @@ public class ClusterData implements Serializable {
     }
 
     public ClusterData(int id, String pondasi, String dinding, String rangkaatap, String kusen, String plafond, String air, String listrik, String jumlahkamar, String luastanah, String fotocluster, String harga, String namacluster) {
+        this.id = id;
         this.pondasi = pondasi;
         this.dinding = dinding;
         this.rangkaatap = rangkaatap;

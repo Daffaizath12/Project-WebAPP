@@ -60,12 +60,26 @@ public class DetailActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        buyBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent getIntent = getIntent();
+                String idDetailcluster = getIntent.getStringExtra("idcluster");
+                Intent intent = new Intent(DetailActivity.this, PemesananActivity.class);
+                intent.putExtra("idcluster", idDetailcluster);
+                startActivity(intent);
+            }
+        });
         getDetailCluster();
     }
 
     private void getDetailCluster() {
 
-        Call<DetailResponse> detailResponseCall = ApiClient.getDetailService(DetailActivity.this).getServiceDetail("36");
+        Intent intent = getIntent();
+        String idDetailcluster = intent.getStringExtra("idcluster");
+
+
+        Call<DetailResponse> detailResponseCall = ApiClient.getDetailService(DetailActivity.this).getServiceDetail(idDetailcluster);
         detailResponseCall.enqueue(new Callback<DetailResponse>() {
             @Override
             public void onResponse(Call<DetailResponse> call, Response<DetailResponse> response) {

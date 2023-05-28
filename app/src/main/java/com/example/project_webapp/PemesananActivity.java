@@ -35,6 +35,7 @@ public class PemesananActivity extends AppCompatActivity {
     EditText txttanggal;
     DatePickerDialog datePickerDialog;
     SimpleDateFormat dateFormatter;
+    ImageView backBtn;
 
     private static final int REQUEST_GALLERY = 1;
     private static final int REQUEST_CAMERA = 2;
@@ -46,10 +47,21 @@ public class PemesananActivity extends AppCompatActivity {
 
         txttanggal = (EditText) findViewById(R.id.txttanggal);
         dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+        backBtn = findViewById(R.id.backbtn);
         txttanggal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 showDateDialog();
+            }
+        });
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent getIntent = getIntent();
+                String idDetailcluster = getIntent.getStringExtra("idcluster");
+                Intent intent = new Intent(PemesananActivity.this, DetailActivity.class);
+                intent.putExtra("idcluster", idDetailcluster);
+                startActivity(intent);
             }
         });
 

@@ -38,7 +38,13 @@ public class ApiClient {
         return detailService;
     }
 
+    public static PemesananService getPemesananService(Context pemesananActivity) {
+       PemesananService pemesananService = getRetrofit().create(PemesananService.class);
+
+        return pemesananService;
+    }
+
     public static String getBaseUrl(){
-        return "http://192.168.1.12/Project-WSI";
+        return "http://192.168.1.5/Project-WSI";
     }
 }

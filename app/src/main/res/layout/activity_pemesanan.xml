@@ -251,15 +251,9 @@
                             android:layout_height="wrap_content"
                             android:orientation="horizontal">
 
-                            <ImageView
-                                android:layout_width="30dp"
-                                android:layout_height="30dp"
-                                android:layout_gravity="center"
-                                android:src="@drawable/uplaod" />
-
                             <Button
                                 android:id="@+id/btnUpload"
-                                android:layout_width="203dp"
+                                android:layout_width="60dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:onClick="showOptionsDialog"
@@ -267,6 +261,12 @@
                                 android:fontFamily="@font/poppinsmedium"
                                 android:textColor="@color/btn"
                                 android:backgroundTint="@color/white"/>
+                            <TextView
+                                android:id="@+id/hasilinputfile"
+                                android:layout_width="150dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                />
 
                         </LinearLayout>
                     </LinearLayout>

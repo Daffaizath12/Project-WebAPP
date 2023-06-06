@@ -15,12 +15,12 @@ public interface PemesananService {
     Call<GlobalResponse> submitOrder(
             @Part("nama") RequestBody nama,
             @Part("alamat") RequestBody alamat,
-            @Part("telepon") RequestBody telepon,
+            @Part("telp") RequestBody telepon,
             @Part("cluster") RequestBody cluster,
             @Part("pembayaran") RequestBody pembayaran,
             @Part("tgl") RequestBody tgl,
             @Part("cicilandp") RequestBody cicilandp,
             @Part("cicilaninhouse") RequestBody cicilaninhouse,
-            @Part MultipartBody.Part file
+            @Part MultipartBody.Part gambar
     );
 }

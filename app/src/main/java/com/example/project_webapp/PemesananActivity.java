@@ -9,6 +9,7 @@ import android.app.DatePickerDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.FileUtils;
@@ -32,7 +33,10 @@ import com.example.project_webapp.Service.HTTP.RegisterRequest;
 import com.example.project_webapp.Service.PemesananService;
 import com.google.android.material.textfield.TextInputEditText;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -58,8 +62,9 @@ public class PemesananActivity extends AppCompatActivity {
     SimpleDateFormat dateFormatter;
     ImageView backBtn;
 
-    private static final int REQUEST_PERMISSION = 1;
-    private static final int REQUEST_PICK_IMAGE = 2;
+    private static final int REQUEST_PICK_IMAGE = 1;
+    private static final int REQUEST_CAMERA = 2;
+
 
     private File selectedFile;
     TextInputEditText inputNama, inputAlamat, inputTelepon;
@@ -145,7 +150,35 @@ public class PemesananActivity extends AppCompatActivity {
                 inhousevalue = adapterView.getItemAtPosition(i).toString();
             }
         });
+
+        pickImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage (v);
+            }
+        });
     }
+
+    private void chooseImage(View v) {
+        String[] options = {"Upload Gambar", "Ambil Foto"};
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Pilih Opsi");
+        builder.setItems(options, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (which == 0) {
+                   Intent intent = new Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                   startActivityForResult(intent,REQUEST_PICK_IMAGE);
+                } else if (which == 1) {
+                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                    startActivityForResult(intent, REQUEST_CAMERA);
+                }
+            }
+        });
+        builder.show();
+    }
+
 
     private void submitOrder() {
         if (selectedFile == null) {
@@ -160,8 +193,9 @@ public class PemesananActivity extends AppCompatActivity {
     private void submitOrderWithFile(File selectedFile) {
 
         // Mengonversi file menjadi RequestBody
-        RequestBody fileRequestBody = RequestBody.create(selectedFile, MediaType.parse("multipart/form-data"));
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file", selectedFile.getName(), fileRequestBody);
+        File file = new File(selectedFile.getPath());
+        RequestBody fileRequestBody = RequestBody.create(file, MediaType.parse("image/jpeg"));
+        MultipartBody.Part filePart = MultipartBody.Part.createFormData("file",file.getName(), fileRequestBody);
 
         // Mendapatkan objek ApiService
         PemesananService apiService = ApiClient.getPemesananService();
@@ -198,34 +232,47 @@ public class PemesananActivity extends AppCompatActivity {
         });
     }
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        if (requestCode == REQUEST_PERMISSION) {
-            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                // Jika izin diberikan, buka galeri untuk memilih gambar
-                openGallery();
-            } else {
-                Toast.makeText(this, "Izin akses penyimpanan ditolak", Toast.LENGTH_SHORT).show();
-            }
-        }
-    }
-    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (requestCode == REQUEST_PICK_IMAGE && resultCode == RESULT_OK && data != null) {
-            // Mendapatkan URI gambar yang dipilih
-            Uri selectedImageUri = data.getData();
-
-            // Mendapatkan path file dari URI
-            String filePath = selectedImageUri.getPath();
-
-            if (filePath != null) {
-                selectedFile = new File(filePath);
-            } else {
-                Toast.makeText(this, "Gagal memilih gambar", Toast.LENGTH_SHORT).show();
+        if (resultCode == RESULT_OK) {
+            if (requestCode == REQUEST_PICK_IMAGE && data != null) {
+                // Mendapatkan URI dari gambar yang dipilih dari galeri
+                Uri selectedImageUri = data.getData();
+                try {
+                    // Mengubah URI menjadi Bitmap
+                    Bitmap bitmap = MediaStore.Images.Media.getBitmap(this.getContentResolver(), selectedImageUri);
+                    // Menampilkan gambar pada ImageView
+                    selectedFile = bitmapToFile(bitmap);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else if (requestCode == REQUEST_CAMERA && data != null) {
+                // Mendapatkan foto yang diambil menggunakan kamera
+                Bitmap photo = (Bitmap) data.getExtras().get("data");
+                // Menampilkan foto pada ImageView
+                selectedFile = bitmapToFile(photo);
             }
+        }
+    }
+    public File bitmapToFile(Bitmap bitmap) {
+        try {
+            File file = new File(getCacheDir(), "temp_image.jpg");
+            file.createNewFile();
+
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+            byte[] bitmapData = byteArrayOutputStream.toByteArray();
+
+            FileOutputStream fileOutputStream = new FileOutputStream(file);
+            fileOutputStream.write(bitmapData);
+            fileOutputStream.flush();
+            fileOutputStream.close();
+
+            return file;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
         }
     }
     private void openGallery() {

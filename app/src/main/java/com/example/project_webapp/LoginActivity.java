@@ -1,5 +1,7 @@
 package com.example.project_webapp;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
@@ -8,6 +10,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -112,13 +115,17 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         Toast.makeText(context, loginResponse.getMessage(), Toast.LENGTH_SHORT).show();
                     }
+                    Toast.makeText(LoginActivity.this, "Login treppp.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(context, "Login Gagal.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Login Gagal.", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
+                Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
+                Log.e(TAG, "onFailure2: "+t.getCause());
+                Log.e(TAG, "onFailure3: "+t.getMessage());
                 Toast.makeText(context, "Throwable "+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -38,6 +38,12 @@ public class ApiClient {
         return detailService;
     }
 
+    public static PemesananService getPemesananService() {
+        PemesananService pemesananService = getRetrofit().create(PemesananService.class);
+
+        return pemesananService;
+    }
+
     public static String getBaseUrl(){
         return "http://192.168.1.12/Project-WSI";
     }

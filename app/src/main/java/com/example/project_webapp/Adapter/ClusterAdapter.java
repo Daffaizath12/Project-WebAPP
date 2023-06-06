@@ -10,8 +10,6 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.bumptech.glide.Glide;
 import com.example.project_webapp.DetailActivity;
 import com.example.project_webapp.R;
 import com.example.project_webapp.Service.HTTP.ClusterResponse;

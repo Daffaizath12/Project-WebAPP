@@ -1,13 +1,10 @@
 package com.example.project_webapp;
 
-import static android.content.ContentValues.TAG;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -106,7 +103,6 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<GlobalResponse> call, Throwable t) {
-                Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
                 Toast.makeText(context, "Throwable "+t.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
             }
         });

@@ -6,6 +6,7 @@ import com.example.project_webapp.Service.HTTP.GlobalResponse;
 import com.example.project_webapp.Service.HTTP.LoginRequest;
 import com.example.project_webapp.Service.HTTP.LoginResponse;
 import com.example.project_webapp.Service.HTTP.RegisterRequest;
+import com.example.project_webapp.Service.HTTP.TersimpanResponse;
 import com.example.project_webapp.Service.HTTP.UserResponse;
 import com.example.project_webapp.Service.SharedPreference.Preferences;
 
@@ -24,6 +25,9 @@ public interface UserService {
 
     @GET("user.php")
     Call<UserResponse> userDetail(@Query("id_user") String id_user);
+
+    @GET("tersimpan_api.php")
+    Call<TersimpanResponse> simpanCLuster(@Query("id_simpan") String id_simpan);
 
 }
 

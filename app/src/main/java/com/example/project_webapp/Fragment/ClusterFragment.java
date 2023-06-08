@@ -5,6 +5,7 @@ import static android.content.ContentValues.TAG;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.project_webapp.Adapter.ClusterAdapter;
+import com.example.project_webapp.Adapter.TersimpanAdapter;
 import com.example.project_webapp.Adapter.ClusterData;
 import com.example.project_webapp.R;
 import com.example.project_webapp.Service.ApiClient;
@@ -82,48 +84,12 @@ public class ClusterFragment extends Fragment {
         rootview = inflater.inflate(R.layout.fragment_cluster, container, false);
 
         RecyclerView recyclerViewall = rootview.findViewById(R.id.viewall);
-        RecyclerView recyclerViewBoulevard = rootview.findViewById(R.id.viewBoulevard);
-        RecyclerView recyclerViewCamelia = rootview.findViewById(R.id.viewCamelia);
-        RecyclerView recyclerViewEdge = rootview.findViewById(R.id.viewEdge);
-        RecyclerView recyclerViewNewedge = rootview.findViewById(R.id.viewNewedge);
-        RecyclerView recyclerViewPinewood = rootview.findViewById(R.id.biewPinewood);
-        RecyclerView recyclerViewPlumeria = rootview.findViewById(R.id.viewPlumeria);
-        RecyclerView recyclerViewQbix = rootview.findViewById(R.id.viewQbix);
-        RecyclerView recyclerViewRuko = rootview.findViewById(R.id.viewRuko);
-        RecyclerView recyclerViewSoho = rootview.findViewById(R.id.viewSoho);
 
         recyclerViewall.setHasFixedSize(true);
-        recyclerViewBoulevard.setHasFixedSize(true);
-        recyclerViewCamelia.setHasFixedSize(true);
-        recyclerViewEdge.setHasFixedSize(true);
-        recyclerViewNewedge.setHasFixedSize(true);
-        recyclerViewPinewood.setHasFixedSize(true);
-        recyclerViewPlumeria.setHasFixedSize(true);
-        recyclerViewQbix.setHasFixedSize(true);
-        recyclerViewRuko.setHasFixedSize(true);
-        recyclerViewSoho.setHasFixedSize(true);
 
-        recyclerViewall.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewBoulevard.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewCamelia.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewEdge.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewNewedge.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewPinewood.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewPlumeria.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewQbix.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewRuko.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
-        recyclerViewSoho.setLayoutManager(new LinearLayoutManager(rootview.getContext(), LinearLayoutManager.HORIZONTAL, false));
+        recyclerViewall.setLayoutManager(new GridLayoutManager(rootview.getContext(), 2));
 
         getCluster(recyclerViewall);
-        getCluster(recyclerViewBoulevard);
-        getCluster(recyclerViewCamelia);
-        getCluster(recyclerViewEdge);
-        getCluster(recyclerViewNewedge);
-        getCluster(recyclerViewPinewood);
-        getCluster(recyclerViewPlumeria);
-        getCluster(recyclerViewQbix);
-        getCluster(recyclerViewRuko);
-        getCluster(recyclerViewSoho);
 
         return rootview;
     }

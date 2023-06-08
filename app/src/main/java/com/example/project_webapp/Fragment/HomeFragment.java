@@ -81,15 +81,10 @@ public class HomeFragment extends Fragment {
         // Inflate the layout for this fragment
         rootview = inflater.inflate(R.layout.fragment_home, container, false);
 
-        RecyclerView recyclerViewall = rootview.findViewById(R.id.viewNew);
         RecyclerView recyclerViewpopuler = rootview.findViewById(R.id.viewPopuler);
-        recyclerViewall.setHasFixedSize(true);
-        recyclerViewall.setLayoutManager(new LinearLayoutManager(rootview.getContext(),LinearLayoutManager.HORIZONTAL, false));
-
         recyclerViewpopuler.setHasFixedSize(true);
         recyclerViewpopuler.setLayoutManager(new LinearLayoutManager(rootview.getContext(),LinearLayoutManager.HORIZONTAL, false));
 
-        getCluster(recyclerViewall);
         getCluster(recyclerViewpopuler);
 
         return rootview;

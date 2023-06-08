@@ -16,11 +16,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.project_webapp.DetailActivity;
 import com.example.project_webapp.LoginActivity;
 import com.example.project_webapp.R;
 import com.example.project_webapp.Service.ApiClient;
 import com.example.project_webapp.Service.HTTP.UserResponse;
 import com.example.project_webapp.Service.SharedPreference.Preferences;
+import com.example.project_webapp.TersimpanActivity;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,7 +45,7 @@ public class SettingFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RelativeLayout logoutBtn;
+    private RelativeLayout logoutBtn, SimpanCluster;
     private TextView nama, email;
     private View rootview;
     private SharedPreferences preferences;
@@ -87,6 +89,7 @@ public class SettingFragment extends Fragment {
 
          nama = rootview.findViewById(R.id.namaText);
          email = rootview.findViewById(R.id.emailText);
+         SimpanCluster = rootview.findViewById(R.id.simpancluster);
          logoutBtn = rootview.findViewById(R.id.logoutbutton);
 
         // Inisialisasi SharedPreferences
@@ -94,6 +97,15 @@ public class SettingFragment extends Fragment {
 
 
         getUser();
+
+        SimpanCluster.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Intent ke Activity lain
+                Intent intent = new Intent(getActivity(), TersimpanActivity.class);
+                startActivity(intent);
+            }
+        });
 
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override

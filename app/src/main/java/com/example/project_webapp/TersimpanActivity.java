@@ -3,6 +3,7 @@ package com.example.project_webapp;
 import static android.content.ContentValues.TAG;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -10,10 +11,14 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.project_webapp.Adapter.ClusterAdapter;
-import com.example.project_webapp.Adapter.ClusterData;
+import com.example.project_webapp.Adapter.SimpanData;
+import com.example.project_webapp.Adapter.TersimpanAdapter;
+import com.example.project_webapp.Adapter.SimpanData;
 import com.example.project_webapp.Service.ApiClient;
 import com.example.project_webapp.Service.HTTP.ClusterResponse;
+import com.example.project_webapp.Service.HTTP.SimpanResponse;
+import com.example.project_webapp.Service.HTTP.SimpanResponse;
+import com.example.project_webapp.Service.SharedPreference.Preferences;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,50 +38,41 @@ public class TersimpanActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.viewtersimpan);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(TersimpanActivity.this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setLayoutManager(new GridLayoutManager(TersimpanActivity.this,2));
 
         getCluster(recyclerView);
     }
     private void getCluster(RecyclerView recyclerView) {
-        Call<ClusterResponse> clusterResponseCall = ApiClient.getDetailService(TersimpanActivity.this).getCluster();
-        clusterResponseCall.enqueue(new Callback<ClusterResponse>() {
+        Call<List<SimpanResponse>> simpanResponseCall = ApiClient.getUserService().getSimpanClusters(Integer.valueOf(Preferences.getLoggedInToken(TersimpanActivity.this)));
+        simpanResponseCall.enqueue(new Callback<List<SimpanResponse>>() {
             @Override
-            public void onResponse(Call<ClusterResponse> call, Response<ClusterResponse> response) {
-
+            public void onResponse(Call<List<SimpanResponse>> call, Response<List<SimpanResponse>> response) {
                 if (response.isSuccessful()){
-                    ClusterResponse clusterResponse = response.body();
-                    if (clusterResponse != null) {
-                        List<ClusterResponse.Data> dataList = clusterResponse.getData();
+                    List simpanResponse = response.body();
+                    if (simpanResponse != null) {
+                        List<SimpanResponse> dataList = simpanResponse;
 
                         // Mengubah List menjadi array ArticleData[]
-                        ClusterData[] articleData = new ClusterData[dataList.size()];
+                        SimpanData[] articleData = new SimpanData[dataList.size()];
 
                         for (int i = 0; i < dataList.size(); i++) {
-                            ClusterResponse.Data data = dataList.get(i);
+                            SimpanResponse data = dataList.get(i);
 
                             // Ambil data yang diperlukan dari objek data
-                            int id = data.getId();
-                            String pondasi = data.getPondasi();
-                            String dinding = data.getDinding();
-                            String rangkaatap = data.getRangkaatap();
-                            String kusen = data.getKusen();
-                            String plafond = data.getPlafond();
-                            String air = data.getAir();
-                            String listrik = data.getListrik();
-                            String jumlahkamar = data.getJumlahkamar();
-                            String luastanah = data.getLuastanah();
+                            int idSimpan = data.getIdSimpan();
+                            int idCluster = data.getIdCluster();
+                            int idUser = data.getIdUser();
                             String fotocluster = data.getFotocluster();
                             String harga = data.getHarga();
                             String namacluster = data.getNamacluster();
 
                             // Buat objek ArticleData dan tambahkan ke array
-                            articleData[i] = new ClusterData(id, pondasi, dinding, rangkaatap, kusen, plafond, air, listrik, jumlahkamar, luastanah,
-                                    ApiClient.getBaseUrl()+"/img/images_cluster/"+fotocluster, harga, namacluster);
+                            articleData[i] = new SimpanData(idSimpan, idCluster, idUser, fotocluster, harga, namacluster);
                         }
 
                         // Tambahkan kode untuk melakukan sesuatu dengan articleData, seperti mengatur adapter RecyclerView
-                        ClusterAdapter clusterAdapter = new ClusterAdapter(articleData, TersimpanActivity.this);
-                        recyclerView.setAdapter(clusterAdapter);
+                        TersimpanAdapter tersimpanAdapter = new TersimpanAdapter(articleData, TersimpanActivity.this);
+                        recyclerView.setAdapter(tersimpanAdapter);
                     } else {
                         Toast.makeText(TersimpanActivity.this, "Data Kosong", Toast.LENGTH_SHORT).show();
                     }
@@ -86,9 +82,7 @@ public class TersimpanActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<ClusterResponse> call, Throwable t) {
-
-                String errorMessage = t.getMessage();
+            public void onFailure(Call<List<SimpanResponse>> call, Throwable t) {
                 Log.e(TAG, "onFailure: "+t.getMessage());
             }
         });

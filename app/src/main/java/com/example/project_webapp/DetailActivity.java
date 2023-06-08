@@ -18,6 +18,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.project_webapp.Service.ApiClient;
 import com.example.project_webapp.Service.HTTP.DetailResponse;
+import com.example.project_webapp.Service.HTTP.GlobalResponse;
+import com.example.project_webapp.Service.HTTP.LoginResponse;
+import com.example.project_webapp.Service.HTTP.RegisterRequest;
+import com.example.project_webapp.Service.HTTP.SimpanRequest;
+import com.example.project_webapp.Service.SharedPreference.Preferences;
+import com.example.project_webapp.Service.UserService;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -76,12 +82,43 @@ public class DetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent getIntent = getIntent();
                 String idDetailcluster = getIntent.getStringExtra("idcluster");
-                Intent intent = new Intent(DetailActivity.this, TersimpanActivity.class);
-                intent.putExtra("idcluster", idDetailcluster);
-                startActivity(intent);
+                simpanCluster(Integer.valueOf(Preferences.getLoggedInToken(DetailActivity.this)), Integer.valueOf(idDetailcluster));
             }
         });
         getDetailCluster();
+    }
+
+    private void simpanCluster(int idUser, int idCluster) {
+        SimpanRequest simpanRequest = new SimpanRequest();
+        simpanRequest.setIdUser(String.valueOf(idUser));
+        simpanRequest.setIdCluster(String.valueOf(idCluster));
+
+
+        Call<GlobalResponse> call = ApiClient.getUserService().simpanCluster(simpanRequest);
+        // Menjalankan permintaan secara asynchronous
+        call.enqueue(new Callback<GlobalResponse>() {
+            @Override
+            public void onResponse(Call<GlobalResponse> call, Response<GlobalResponse> response) {
+                if (response.isSuccessful()) {
+                    GlobalResponse apiResponse = response.body();
+                    if (apiResponse != null) {
+                        String message = apiResponse.getMessage();
+                        showToast(message);
+                    }
+                } else {
+                    showToast("Gagal menghubungi API");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<GlobalResponse> call, Throwable t) {
+                Log.e(TAG, "onFailure: "+t.getLocalizedMessage());
+                showToast("Kesalahan jaringan atau kesalahan lainnya");
+            }
+        });
+    }
+    private void showToast(String message) {
+        Toast.makeText(DetailActivity.this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void getDetailCluster() {

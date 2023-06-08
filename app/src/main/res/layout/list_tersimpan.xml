@@ -1,32 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <androidx.cardview.widget.CardView
         android:id="@+id/list_cluster"
-        android:layout_width="400dp"
-        android:layout_height="200dp"
-        android:layout_margin="10dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5"
+        android:layout_margin="5dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
         app:cardElevation="10dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="16dp"
-            android:paddingTop="16dp"
-            android:paddingRight="16dp"
-            android:paddingBottom="16dp">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/pic"
                 android:scaleType="fitXY"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:src="@drawable/bernadyland"/>
-
+                android:src="@drawable/pic1"/>
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

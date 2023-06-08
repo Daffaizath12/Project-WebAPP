@@ -31,7 +31,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView titleTxt, pondasiTxt, dindingTxt, rangkaatapTxt, kusenTxt, plafondTxt, airTxt, listrikTxt, jumlahkamarTxt, luastanahTxt, priceTxt;
     private ImageView pic;
     private ImageButton backBtn;
-    private Button buyBtn;
+    private Button buyBtn, btnsimpan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +52,7 @@ public class DetailActivity extends AppCompatActivity {
         pic = findViewById(R.id.pic);
         buyBtn = findViewById(R.id.buyBtn);
         backBtn = findViewById(R.id.backbtn);
+        btnsimpan = findViewById(R.id.btnsimpan);
 
         backBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,6 +67,16 @@ public class DetailActivity extends AppCompatActivity {
                 Intent getIntent = getIntent();
                 String idDetailcluster = getIntent.getStringExtra("idcluster");
                 Intent intent = new Intent(DetailActivity.this, PemesananActivity.class);
+                intent.putExtra("idcluster", idDetailcluster);
+                startActivity(intent);
+            }
+        });
+        btnsimpan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent getIntent = getIntent();
+                String idDetailcluster = getIntent.getStringExtra("idcluster");
+                Intent intent = new Intent(DetailActivity.this, TersimpanActivity.class);
                 intent.putExtra("idcluster", idDetailcluster);
                 startActivity(intent);
             }

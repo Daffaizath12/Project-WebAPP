@@ -11,13 +11,9 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.project_webapp.DetailActivity;
 import com.example.project_webapp.R;
-import com.example.project_webapp.Service.HTTP.ClusterResponse;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 public class ClusterAdapter extends RecyclerView.Adapter<ClusterAdapter.ViewHolder> {
     ClusterData[] clusterData;
@@ -49,7 +45,6 @@ public class ClusterAdapter extends RecyclerView.Adapter<ClusterAdapter.ViewHold
             intent.putExtra("idcluster", String.valueOf(clusterDatalist.getId()));
             context.startActivity(intent);
         });
-
     }
 
     @Override

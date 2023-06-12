@@ -14,8 +14,10 @@ import com.example.project_webapp.DetailActivity;
 import com.example.project_webapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class TersimpanAdapter extends RecyclerView.Adapter<TersimpanAdapter.ViewHolder>{
-    SimpanData[] simpanData;
+    SimpanData [] simpanData;
     Context context;
 
     public TersimpanAdapter(SimpanData[] simpanData, Context context) {

@@ -20,6 +20,7 @@ import com.example.project_webapp.DetailActivity;
 import com.example.project_webapp.LoginActivity;
 import com.example.project_webapp.R;
 import com.example.project_webapp.Service.ApiClient;
+import com.example.project_webapp.Service.HTTP.GlobalResponse;
 import com.example.project_webapp.Service.HTTP.UserResponse;
 import com.example.project_webapp.Service.SharedPreference.Preferences;
 import com.example.project_webapp.TersimpanActivity;

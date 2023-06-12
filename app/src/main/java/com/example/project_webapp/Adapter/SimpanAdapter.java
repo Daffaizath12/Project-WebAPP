@@ -12,53 +12,69 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_webapp.DetailActivity;
 import com.example.project_webapp.R;
+import com.example.project_webapp.Service.ApiClient;
+import com.example.project_webapp.Service.HTTP.SimpanCluster;
 import com.squareup.picasso.Picasso;
 
-public class SimpanAdapter extends RecyclerView.Adapter<SimpanAdapter.ViewHolder>{
-    ClusterData[] clusterData;
-    Context context;
+import java.util.List;
 
-    public SimpanAdapter(ClusterData[] clusterData, Context context) {
-        this.clusterData = clusterData;
+public class SimpanAdapter extends RecyclerView.Adapter<SimpanAdapter.ViewHolder> {
+
+    private Context context;
+    private List<SimpanCluster> simpanClusters;
+
+    public SimpanAdapter(Context context, List<SimpanCluster> simpanClusters) {
         this.context = context;
+        this.simpanClusters = simpanClusters;
     }
 
     @NonNull
     @Override
-    public SimpanAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.list_tersimpan,parent,false);
-        SimpanAdapter.ViewHolder viewHolder = new SimpanAdapter.ViewHolder(view);
+        View view = layoutInflater.inflate(R.layout.item_viewholder,parent,false);
+        ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SimpanAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+        context = holder.itemView.getContext();
+        SimpanCluster simpanCluster = simpanClusters.get(position);
 
-        final Context context = holder.itemView.getContext();
-        final ClusterData clusterDatalist = clusterData[position];
-        Picasso.get().load(clusterDatalist.getFotocluster()).into(holder.pic);
+        // Menampilkan gambar menggunakan Picasso
+        // Menampilkan gambar menggunakan Picasso
+        String imageUrl = getClusterImageUrl(simpanCluster.getFotoCluster());
+        Picasso.get()
+                .load(imageUrl)
+                .into(holder.pic);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("idcluster", String.valueOf(clusterDatalist.getId()));
+            intent.putExtra("idcluster", String.valueOf(simpanCluster.getIdCluster()));
             context.startActivity(intent);
         });
     }
 
-    @Override
-    public int getItemCount() {
-        return clusterData.length;
+    private String getClusterImageUrl(String FotoCluster) {
+        String baseUrl = ApiClient.getBaseUrl()+"/img/images_cluster/"+FotoCluster;
+        return baseUrl;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    @Override
+    public int getItemCount() {
+        return simpanClusters.size();
+    }
+
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView pic;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             pic = itemView.findViewById(R.id.pic);
-
         }
     }
 }
+
+
 

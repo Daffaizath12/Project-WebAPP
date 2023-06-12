@@ -87,7 +87,7 @@ public class ClusterFragment extends Fragment {
 
         recyclerViewall.setHasFixedSize(true);
 
-        recyclerViewall.setLayoutManager(new GridLayoutManager(rootview.getContext(), 2));
+        recyclerViewall.setLayoutManager(new GridLayoutManager(rootview.getContext(), 1));
 
         getCluster(recyclerViewall);
 

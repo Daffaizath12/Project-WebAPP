@@ -45,6 +45,6 @@ public class ApiClient {
     }
 
     public static String getBaseUrl(){
-        return "http://192.168.1.3/Project-WSI";
+        return "http://192.168.1.8/Project-WSI";
     }
 }

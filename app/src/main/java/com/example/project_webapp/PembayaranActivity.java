@@ -19,7 +19,7 @@ public class PembayaranActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        btnBayar = findViewById(R.id.btnBayar);
+        btnBayar = findViewById(R.id.btnBayarDP);
         btnBayar.setOnClickListener(view -> startActivity(new Intent(PembayaranActivity.this, PembayaranDetail.class)));
     }
 }

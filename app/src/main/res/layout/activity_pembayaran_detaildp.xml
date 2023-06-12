@@ -35,7 +35,7 @@
                     android:layout_alignParentStart="true"
                     android:layout_centerInParent="true"
                     android:layout_marginStart="50dp"
-                    android:text="Pembayaran"
+                    android:text="Pembayaran DP"
                     android:textColor="#f5f0e1"
                     android:textSize="20sp"
                     android:textStyle="bold" />
@@ -68,7 +68,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="380dp"
+                    android:layout_height="550dp"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -99,46 +99,108 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
                         android:orientation="vertical">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Id Pemesanan"
+                            android:text="Id Pembayaran DP"
                             android:textColor="@color/black"
                             android:textSize="14sp" />
                         <EditText
-                            android:id="@+id/inputId"
+                            android:id="@+id/inputIdPembayaran"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="10dp"
-                            android:hint="Masukkan Id Pemesanan" />
+                            android:layout_marginTop="5dp"
+                            android:hint="Masukkan Id Pembayaran DP" />
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="20dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
                         android:orientation="vertical">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Upload Bukti Pembayaran"
+                        android:text="Id Pemesanan Rumah"
                         android:textColor="@color/black"
                         android:textSize="14sp" />
                         <EditText
-                            android:id="@+id/uploadfile"
+                            android:id="@+id/inputIdPemesanan"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="10dp"
-                            android:drawableStart="@drawable/uplaod"
-                            android:hint="Upload File Disini" />
+                            android:hint="Masukkan Id Pemesanan Rumah" />
                     </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="vertical">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Status DP"
+                            android:textColor="@color/black"
+                            android:textSize="14sp" />
+                        <EditText
+                            android:id="@+id/status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:hint="Masukkan status DP" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
+                        android:orientation="vertical">
+                        <EditText
+                            android:id="@+id/txttanggalDP"
+                            android:layout_width="350dp"
+                            android:layout_height="wrap_content"
+                            android:drawableEnd="@drawable/date"
+                            android:focusable="false"
+                            android:hint="Tanggal"
+                            android:textAlignment="center"
+                            android:textSize="14sp" />
+
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <Button
+                            android:id="@+id/btnUploadDP"
+                            android:layout_width="120dp"
+                            android:layout_height="50dp"
+                            android:backgroundTint="@color/white"
+                            android:fontFamily="@font/poppinsmedium"
+                            android:onClick="showOptionsDialog"
+                            android:text="File Upload"
+                            android:textSize="12sp"
+                            android:textColor="@color/btn"
+                            android:layout_gravity="center"/>
+
+                        <TextView
+                            android:id="@+id/textviewfile"
+                            android:layout_width="match_parent"
+                            android:layout_height="50dp"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/btnCheckout"
+                android:id="@+id/btnBayarSekarang"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_margin="30dp"

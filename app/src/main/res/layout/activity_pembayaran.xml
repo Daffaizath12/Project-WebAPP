@@ -130,7 +130,7 @@
                             android:orientation="horizontal">
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnBayar"
+                                android:id="@+id/btnBayarDP"
                                 android:layout_width="wrap_content"
                                 android:layout_height="60dp"
                                 android:layout_margin="30dp"
@@ -145,7 +145,7 @@
                                 app:rippleColor="#1e3d59" />
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnRiwayat"
+                                android:id="@+id/btnRiwayatDP"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_marginTop="24dp"
@@ -240,7 +240,7 @@
                             android:orientation="horizontal">
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnBayar"
+                                android:id="@+id/btnBayarInHouse"
                                 android:layout_width="wrap_content"
                                 android:layout_height="60dp"
                                 android:layout_margin="30dp"
@@ -255,7 +255,7 @@
                                 app:rippleColor="#1e3d59" />
 
                             <com.google.android.material.button.MaterialButton
-                                android:id="@+id/btnRiwayat"
+                                android:id="@+id/btnRiwayatInHouse"
                                 android:layout_width="match_parent"
                                 android:layout_height="60dp"
                                 android:layout_marginTop="24dp"

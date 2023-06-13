@@ -3,6 +3,7 @@ package com.example.project_webapp.Service;
 import com.example.project_webapp.Service.HTTP.GlobalResponse;
 import com.example.project_webapp.Service.HTTP.LoginRequest;
 import com.example.project_webapp.Service.HTTP.LoginResponse;
+import com.example.project_webapp.Service.HTTP.ProgresResponse;
 import com.example.project_webapp.Service.HTTP.RegisterRequest;
 import com.example.project_webapp.Service.HTTP.SimpanCluster;
 import com.example.project_webapp.Service.HTTP.SimpanRequest;
@@ -31,5 +32,8 @@ public interface UserService {
 
     @GET("cluster_tersimpan.php")
     Call<List<SimpanCluster>> getSimpanClusters(@Query("id_user") String idUser);
+
+    @GET("progres_api.php")
+    Call<List<ProgresResponse>> getProgres(@Query("id_user") String idUser);
 }
 

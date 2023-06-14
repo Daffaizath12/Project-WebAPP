@@ -1,8 +1,6 @@
 package com.example.project_webapp.Service.HTTP;
 
-import com.google.gson.annotations.SerializedName;
-
-public class SimpanCluster {
+public class SimpanResponse {
     private String idSimpan;
     private String idUser;
     private String idCluster;

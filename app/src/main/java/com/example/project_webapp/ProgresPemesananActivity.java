@@ -1,10 +1,14 @@
 package com.example.project_webapp;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.example.project_webapp.Adapter.ProgresAdapter;
@@ -20,11 +24,22 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ProgresPemesananActivity extends AppCompatActivity {
+import android.os.Bundle;
+import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class ProgresPemesananActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private ProgresAdapter progresAdapter;
-    private List<ProgresData> progresList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,51 +47,52 @@ public class ProgresPemesananActivity extends AppCompatActivity {
         setContentView(R.layout.activity_progres_pemesanan);
 
         recyclerView = findViewById(R.id.viewprogres);
+        recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        progresList = new ArrayList<>();
-        progresAdapter = new ProgresAdapter(this, progresList);
-        recyclerView.setAdapter(progresAdapter);
+
 
         // Mendapatkan id_user dari Intent atau sesuai kebutuhan Anda
         String idUser = Preferences.getLoggedInToken(ProgresPemesananActivity.this);
 
-        getProgresPemesanan(idUser);
+        getProgresPemesanan(recyclerView, idUser);
     }
 
-        private void getProgresPemesanan(String idUser) {
-            // Mengirim request ke API dan mengambil data progres
-            Call<List<ProgresResponse>> call = ApiClient.getUserService().getProgres(idUser);
-            call.enqueue(new Callback<List<ProgresResponse>>() {
-                @Override
-                public void onResponse(Call<List<ProgresResponse>> call, Response<List<ProgresResponse>> response) {
-                    if (response.isSuccessful()) {
-                        List<ProgresResponse> progresResponses = response.body();
-                        if (progresResponses != null) {
-                            for (ProgresResponse progresResponse : progresResponses) {
-                                String idPemesanan = progresResponse.getId_pemesanan();
-                                String status = progresResponse.getStatus();
-                                String keterangan = progresResponse.getKeterangan();
-                                String foto = progresResponse.getFoto();
-                                String tanggal = progresResponse.getTanggal();
-                                String namaPemesan = progresResponse.getNama_pemesan();
+    private void getProgresPemesanan(RecyclerView recyclerView, String idUser) {
+        // Mengirim request ke API dan mengambil data progres
+        Call<ProgresResponse> call = ApiClient.getUserService().getProgres(idUser);
+        call.enqueue(new Callback<ProgresResponse>() {
+            @Override
+            public void onResponse(Call<ProgresResponse> call, Response<ProgresResponse> response) {
 
-                                ProgresData progresData = new ProgresData(idPemesanan, status, keterangan, foto, tanggal, namaPemesan);
-                                progresList.add(progresData);
-                            }
+                if (response.isSuccessful()) {
+                    ProgresResponse progresResponse = response.body();
+                    if (progresResponse != null) {
+                        String idPemesanan = progresResponse.getIdPemesanan();
+                        String status = progresResponse.getStatus();
+                        String keterangan = progresResponse.getKeterangan();
+                        String foto = progresResponse.getFoto();
+                        String tanggal = progresResponse.getTanggal();
+                        String namaPemesan = progresResponse.getNamaPemesan();
 
-                            progresAdapter.notifyDataSetChanged();
-                        } else {
-                            Toast.makeText(ProgresPemesananActivity.this, "Response API tidak valid", Toast.LENGTH_SHORT).show();
-                        }
+                        ProgresData progresData = new ProgresData(idPemesanan, status, keterangan, ApiClient.getImgUrl()+"/proggres/"+foto, tanggal, namaPemesan);
+                        List<ProgresData> progresList = new ArrayList<>();
+                        progresList.add(progresData);
+
+                        ProgresAdapter progresAdapter = new ProgresAdapter(progresList, ProgresPemesananActivity.this);
+                        recyclerView.setAdapter(progresAdapter);
                     } else {
-                        Toast.makeText(ProgresPemesananActivity.this, "Gagal mendapatkan data progres", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ProgresPemesananActivity.this, "Data Kosong", Toast.LENGTH_SHORT).show();
                     }
+                } else {
+                    Toast.makeText(ProgresPemesananActivity.this, "Gagal Mengambil Data", Toast.LENGTH_SHORT).show();
                 }
+            }
 
-                @Override
-                public void onFailure(Call<List<ProgresResponse>> call, Throwable t) {
-                    Toast.makeText(ProgresPemesananActivity.this, "Terjadi kesalahan: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+            @Override
+            public void onFailure(Call<ProgresResponse> call, Throwable t) {
+                Toast.makeText(ProgresPemesananActivity.this, "Terjadi kesalahan: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+}
+

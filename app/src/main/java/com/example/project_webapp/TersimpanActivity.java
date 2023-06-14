@@ -12,8 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.project_webapp.Adapter.SimpanAdapter;
+import com.example.project_webapp.Adapter.SimpanData;
+import com.example.project_webapp.Adapter.SimpanAdapter;
 import com.example.project_webapp.Service.ApiClient;
-import com.example.project_webapp.Service.HTTP.SimpanCluster;
+import com.example.project_webapp.Service.HTTP.SimpanResponse;
+import com.example.project_webapp.Service.HTTP.SimpanResponse;
 import com.example.project_webapp.Service.SharedPreference.Preferences;
 
 import java.util.ArrayList;
@@ -25,9 +28,6 @@ import retrofit2.Response;
 
 public class TersimpanActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private SimpanAdapter simpanAdapter;
-    private List<SimpanCluster> simpanClusters;
-    private SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +36,8 @@ public class TersimpanActivity extends AppCompatActivity {
 
         // Inisialisasi RecyclerView dan Adapter
         recyclerView = findViewById(R.id.viewtersimpan);
-        recyclerView.setLayoutManager(new LinearLayoutManager(TersimpanActivity.this));
-        simpanClusters = new ArrayList<>();
-        simpanAdapter = new SimpanAdapter(this, simpanClusters);
-        recyclerView.setAdapter(simpanAdapter);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(TersimpanActivity.this, LinearLayoutManager.VERTICAL, false));
 
 
         // Inisialisasi SharedPreferences
@@ -50,26 +48,38 @@ public class TersimpanActivity extends AppCompatActivity {
     }
 
     private void getSimpanClusters(String idUser) {
-        Call<List<SimpanCluster>> call = ApiClient.getUserService().getSimpanClusters(idUser);
-        call.enqueue(new Callback<List<SimpanCluster>>() {
+        Call<SimpanResponse> call = ApiClient.getUserService().getSimpanCluster(idUser);
+        call.enqueue(new Callback<SimpanResponse>() {
             @Override
-            public void onResponse(Call<List<SimpanCluster>> call, Response<List<SimpanCluster>> response) {
+            public void onResponse(Call<SimpanResponse> call, Response<SimpanResponse> response) {
+
                 if (response.isSuccessful()) {
-                    List<SimpanCluster> responseSimpanClusters = response.body();
-                    simpanClusters.clear();
-                    simpanClusters.addAll(responseSimpanClusters);
-                    simpanAdapter.notifyDataSetChanged();
+                    SimpanResponse simpanResponse = response.body();
+                    if (simpanResponse != null) {
+                        String idSimpan = simpanResponse.getIdSimpan();
+                        String idCluster = simpanResponse.getIdCluster();
+                        String fotocluster = simpanResponse.getFotocluster();
+                        String harga = simpanResponse.getHarga();
+                        String namacluster = simpanResponse.getNamacluster();
+
+                        SimpanData simpanData = new SimpanData(idSimpan, idCluster, ApiClient.getBaseUrl()+"img//images_cluster/"+fotocluster, harga, namacluster);
+                        List<SimpanData> simpanList = new ArrayList<>();
+                        simpanList.add(simpanData);
+
+                        SimpanAdapter simpanAdapter = new SimpanAdapter(simpanList, TersimpanActivity.this);
+                        recyclerView.setAdapter(simpanAdapter);
+                    } else {
+                        Toast.makeText(TersimpanActivity.this, "Data Kosong", Toast.LENGTH_SHORT).show();
+                    }
                 } else {
-                    // Handle error response
-                    Toast.makeText(TersimpanActivity.this, "Failed to get simpan clusters", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(TersimpanActivity.this, "Gagal Mengambil Data", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<SimpanCluster>> call, Throwable t) {
-                // Tangani kesalahan jaringan atau kegagalan permintaan
-                Toast.makeText(TersimpanActivity.this, "Failed to get simpan clusters: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "onFailure: "+t.getMessage());
+            public void onFailure(Call<SimpanResponse> call, Throwable t) {
+                Toast.makeText(TersimpanActivity.this, "Terjadi kesalahan: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });
     }

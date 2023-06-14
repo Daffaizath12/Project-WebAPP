@@ -12,12 +12,14 @@ import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.project_webapp.DetailActivity;
 import com.example.project_webapp.LoginActivity;
+import com.example.project_webapp.ProgresPemesananActivity;
 import com.example.project_webapp.R;
 import com.example.project_webapp.Service.ApiClient;
 import com.example.project_webapp.Service.HTTP.GlobalResponse;
@@ -46,7 +48,7 @@ public class SettingFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RelativeLayout logoutBtn, SimpanCluster;
+    private RelativeLayout logoutBtn, SimpanCluster, Progresbtn;
     private TextView nama, email;
     private View rootview;
     private SharedPreferences preferences;
@@ -92,6 +94,7 @@ public class SettingFragment extends Fragment {
          email = rootview.findViewById(R.id.emailText);
          SimpanCluster = rootview.findViewById(R.id.simpancluster);
          logoutBtn = rootview.findViewById(R.id.logoutbutton);
+         Progresbtn = rootview.findViewById(R.id.progresbtn);
 
         // Inisialisasi SharedPreferences
         preferences = PreferenceManager.getDefaultSharedPreferences(rootview.getContext());
@@ -102,8 +105,25 @@ public class SettingFragment extends Fragment {
         SimpanCluster.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Mendapatkan id_user secara otomatis (misalnya dari SharedPreferences atau dari sumber data lainnya)
+                String idUser = Preferences.getLoggedInToken(getActivity());
+
                 // Intent ke Activity lain
                 Intent intent = new Intent(getActivity(), TersimpanActivity.class);
+                intent.putExtra("id_user", idUser);
+                startActivity(intent);
+            }
+        });
+
+        Progresbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Mendapatkan id_user secara otomatis (misalnya dari SharedPreferences atau dari sumber data lainnya)
+                String idUser = Preferences.getLoggedInToken(getActivity());
+
+                // Intent ke Activity lain
+                Intent intent = new Intent(getActivity(), ProgresPemesananActivity.class);
+                intent.putExtra("id_user", idUser);
                 startActivity(intent);
             }
         });

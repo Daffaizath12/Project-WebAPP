@@ -47,4 +47,7 @@ public class ApiClient {
     public static String getBaseUrl(){
         return "http://192.168.1.8/Project-WSI";
     }
+    public static  String getImgUrl(){
+        return "http://192.168.1.8/Project-WSI/img";
+    }
 }

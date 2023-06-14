@@ -6,7 +6,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -16,13 +15,11 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.project_webapp.Adapter.ClusterAdapter;
-import com.example.project_webapp.Adapter.TersimpanAdapter;
 import com.example.project_webapp.Adapter.ClusterData;
 import com.example.project_webapp.R;
 import com.example.project_webapp.Service.ApiClient;
 import com.example.project_webapp.Service.HTTP.ClusterResponse;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Call;

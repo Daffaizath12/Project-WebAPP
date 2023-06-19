@@ -30,6 +30,9 @@
             android:name=".RiwayatPembayaranDpActivity"
             android:exported="false" />
         <activity
+            android:name=".RiwayatPembayaranInHouseActivity"
+            android:exported="false" />
+        <activity
             android:name=".TersimpanActivity"
             android:exported="false" />
         <activity

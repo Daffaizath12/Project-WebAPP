@@ -18,10 +18,10 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class ProgresAdapter extends RecyclerView.Adapter<ProgresAdapter.ProgresViewHolder> {
-    private List<ProgresData> progresList;
+    private ProgresData[] progresList;
     private Context context;
 
-    public ProgresAdapter(List<ProgresData> progresList, Context context) {
+    public ProgresAdapter(ProgresData[] progresList, Context context) {
         this.progresList = progresList;
         this.context = context;
     }
@@ -35,13 +35,13 @@ public class ProgresAdapter extends RecyclerView.Adapter<ProgresAdapter.ProgresV
 
     @Override
     public void onBindViewHolder(@NonNull ProgresViewHolder holder, int position) {
-        ProgresData progresData = progresList.get(position);
+        ProgresData progresData = progresList[position];
         holder.bind(progresData);
     }
 
     @Override
     public int getItemCount() {
-        return progresList.size();
+        return progresList.length;
     }
 
     public static class ProgresViewHolder extends RecyclerView.ViewHolder {

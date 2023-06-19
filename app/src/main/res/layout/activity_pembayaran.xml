@@ -66,7 +66,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="280dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -87,6 +87,20 @@
                             android:textSize="18sp"/>
 
                     </LinearLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/pembayarandp">
+
+
+                        <AutoCompleteTextView
+                            android:id="@+id/pembayarandp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -167,7 +181,6 @@
                     </LinearLayout>
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
-
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -177,7 +190,7 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="280dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical">
 
                     <LinearLayout
@@ -185,6 +198,7 @@
                         android:layout_height="60dp"
                         android:background="#1e3d59"
                         android:orientation="horizontal">
+
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -194,9 +208,23 @@
                             android:layout_marginEnd="20dp"
                             android:text="Pembayaran InHouse"
                             android:textColor="@color/white"
-                            android:textSize="18sp" />
+                            android:textSize="18sp"/>
 
                     </LinearLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/pembayarandp">
+
+
+                        <AutoCompleteTextView
+                            android:id="@+id/pembayaraninhouse"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

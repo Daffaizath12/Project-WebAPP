@@ -243,7 +243,7 @@
                                 android:backgroundTint="@color/white"
                                 android:fontFamily="@font/poppinsmedium"
                                 android:onClick="showOptionsDialog"
-                                android:text="File Upload"
+                                android:text="Upload file"
                                 android:textSize="12sp"
                                 android:textColor="@color/btn"
                                 android:layout_gravity="center"/>

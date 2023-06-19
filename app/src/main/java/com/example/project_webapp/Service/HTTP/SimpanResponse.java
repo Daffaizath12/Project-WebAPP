@@ -1,58 +1,75 @@
 package com.example.project_webapp.Service.HTTP;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
+
 public class SimpanResponse {
-    private String idSimpan;
-    private String idUser;
-    private String idCluster;
-    private String namaCluster;
-    private String fotoCluster;
-    private String harga;
+    @SerializedName("data")
+    private List<Data> data;
 
-    public String getIdSimpan() {
-        return idSimpan;
+    public List<Data> getData() {
+        return data;
     }
 
-    public void setIdSimpan(String idSimpan) {
-        this.idSimpan = idSimpan;
+    public void setData(List<Data> data) {
+        this.data = data;
     }
 
-    public String getIdUser() {
-        return idUser;
-    }
+    public static class Data {
+        private String id_simpan;
+        private String idUser;
+        private String id_cluster;
+        private String namacluster;
+        private String fotocluster;
+        private String harga;
 
-    public void setIdUser(String idUser) {
-        this.idUser = idUser;
-    }
+        public String getIdSimpan() {
+            return id_simpan;
+        }
 
-    public String getIdCluster() {
-        return idCluster;
-    }
+        public void setIdSimpan(String id_simpan) {
+            this.id_simpan = id_simpan;
+        }
 
-    public void setIdCluster(String idCluster) {
-        this.idCluster = idCluster;
-    }
+        public String getIdUser() {
+            return idUser;
+        }
 
-    public String getNamaCluster() {
-        return namaCluster;
-    }
+        public void setIdUser(String idUser) {
+            this.idUser = idUser;
+        }
 
-    public void setNamaCluster(String namaCluster) {
-        this.namaCluster = namaCluster;
-    }
+        public String getIdCluster() {
+            return id_cluster;
+        }
 
-    public String getFotoCluster() {
-        return fotoCluster;
-    }
+        public void setIdCluster(String id_cluster) {
+            this.id_cluster = id_cluster;
+        }
 
-    public void setFotoCluster(String fotoCluster) {
-        this.fotoCluster = fotoCluster;
-    }
+        public String getNamaCluster() {
+            return namacluster;
+        }
 
-    public String getHarga() {
-        return harga;
-    }
+        public void setNamaCluster(String namacluster) {
+            this.namacluster = namacluster;
+        }
 
-    public void setHarga(String harga) {
-        this.harga = harga;
+        public String getFotoCluster() {
+            return fotocluster;
+        }
+
+        public void setFotoCluster(String fotocluster) {
+            this.fotocluster = fotocluster;
+        }
+
+        public String getHarga() {
+            return harga;
+        }
+
+        public void setHarga(String harga) {
+            this.harga = harga;
+        }
     }
 }

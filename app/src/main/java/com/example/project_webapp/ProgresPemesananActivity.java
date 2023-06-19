@@ -13,7 +13,9 @@ import android.widget.Toast;
 
 import com.example.project_webapp.Adapter.ProgresAdapter;
 import com.example.project_webapp.Adapter.ProgresData;
+import com.example.project_webapp.Adapter.SimpanData;
 import com.example.project_webapp.Service.ApiClient;
+import com.example.project_webapp.Service.HTTP.ProgresResponse;
 import com.example.project_webapp.Service.HTTP.ProgresResponse;
 import com.example.project_webapp.Service.SharedPreference.Preferences;
 
@@ -48,16 +50,17 @@ public class ProgresPemesananActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.viewprogres);
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(ProgresPemesananActivity.this, LinearLayoutManager.VERTICAL, false));
 
 
-        // Mendapatkan id_user dari Intent atau sesuai kebutuhan Anda
+        // Inisialisasi SharedPreferences
         String idUser = Preferences.getLoggedInToken(ProgresPemesananActivity.this);
 
-        getProgresPemesanan(recyclerView, idUser);
+        // Panggil API untuk mendapatkan data simpan cluster
+        getProgresPemesanan(idUser);
     }
 
-    private void getProgresPemesanan(RecyclerView recyclerView, String idUser) {
+    private void getProgresPemesanan(String idUser) {
         // Mengirim request ke API dan mengambil data progres
         Call<ProgresResponse> call = ApiClient.getUserService().getProgres(idUser);
         call.enqueue(new Callback<ProgresResponse>() {
@@ -67,18 +70,24 @@ public class ProgresPemesananActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     ProgresResponse progresResponse = response.body();
                     if (progresResponse != null) {
-                        String idPemesanan = progresResponse.getIdPemesanan();
-                        String status = progresResponse.getStatus();
-                        String keterangan = progresResponse.getKeterangan();
-                        String foto = progresResponse.getFoto();
-                        String tanggal = progresResponse.getTanggal();
-                        String namaPemesan = progresResponse.getNamaPemesan();
+                        List<ProgresResponse.Data> dataList = progresResponse.getData();
 
-                        ProgresData progresData = new ProgresData(idPemesanan, status, keterangan, ApiClient.getImgUrl()+"/proggres/"+foto, tanggal, namaPemesan);
-                        List<ProgresData> progresList = new ArrayList<>();
-                        progresList.add(progresData);
+                        // Mengubah List menjadi array ArticleData[]
+                        ProgresData[] progresData = new ProgresData[dataList.size()];
 
-                        ProgresAdapter progresAdapter = new ProgresAdapter(progresList, ProgresPemesananActivity.this);
+                        for (int i = 0; i < dataList.size(); i++) {
+                            ProgresResponse.Data data = dataList.get(i);
+                            String idPemesanan = data.getIdPemesanan();
+                            String status = data.getStatus();
+                            String keterangan = data.getKeterangan();
+                            String foto = data.getFoto();
+                            String tanggal = data.getTanggal();
+                            String namaPemesan = data.getNamaPemesan();
+
+                            progresData[i] = new ProgresData(idPemesanan, status, keterangan, ApiClient.getBaseUrl()+"/img/proggres/"+foto, tanggal, namaPemesan);
+                        }
+
+                        ProgresAdapter progresAdapter = new ProgresAdapter(progresData, ProgresPemesananActivity.this);
                         recyclerView.setAdapter(progresAdapter);
                     } else {
                         Toast.makeText(ProgresPemesananActivity.this, "Data Kosong", Toast.LENGTH_SHORT).show();

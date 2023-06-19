@@ -11,10 +11,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.project_webapp.Adapter.ClusterData;
 import com.example.project_webapp.Adapter.SimpanAdapter;
 import com.example.project_webapp.Adapter.SimpanData;
 import com.example.project_webapp.Adapter.SimpanAdapter;
 import com.example.project_webapp.Service.ApiClient;
+import com.example.project_webapp.Service.HTTP.SimpanResponse;
 import com.example.project_webapp.Service.HTTP.SimpanResponse;
 import com.example.project_webapp.Service.HTTP.SimpanResponse;
 import com.example.project_webapp.Service.SharedPreference.Preferences;
@@ -56,22 +58,24 @@ public class TersimpanActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     SimpanResponse simpanResponse = response.body();
                     if (simpanResponse != null) {
-                        String idSimpan = simpanResponse.getIdSimpan();
-                        String idCluster = simpanResponse.getIdCluster();
-                        String fotocluster = simpanResponse.getFotoCluster();
-                        String harga = simpanResponse.getHarga();
-                        String namacluster = simpanResponse.getNamaCluster();
+                        List<SimpanResponse.Data> dataList = simpanResponse.getData();
 
-                        SimpanData simpanData = new SimpanData(idSimpan, idCluster, ApiClient.getBaseUrl()+"img/images_cluster/"+fotocluster, harga, namacluster);
-                        List<SimpanData> simpanList = new ArrayList<>();
-                        simpanList.add(simpanData);
+                        // Mengubah List menjadi array ArticleData[]
+                        SimpanData[] simpanData = new SimpanData[dataList.size()];
 
-                        if (simpanList.isEmpty()) {
-                            Toast.makeText(TersimpanActivity.this, "Data Kosong", Toast.LENGTH_SHORT).show();
-                        } else {
-                            SimpanAdapter simpanAdapter = new SimpanAdapter(simpanList, TersimpanActivity.this);
-                            recyclerView.setAdapter(simpanAdapter);
+                        for (int i = 0; i < dataList.size(); i++) {
+                            SimpanResponse.Data data = dataList.get(i);
+                            String idSimpan = data.getIdSimpan();
+                            String idCluster = data.getIdCluster();
+                            String fotocluster = data.getFotoCluster();
+                            String harga = data.getHarga();
+                            String namacluster = data.getNamaCluster();
+
+                            simpanData[i] = new SimpanData(idSimpan, idCluster, ApiClient.getBaseUrl()+"/img/images_cluster/"+fotocluster, harga, namacluster);
                         }
+
+                        SimpanAdapter simpanAdapter = new SimpanAdapter(simpanData, TersimpanActivity.this);
+                        recyclerView.setAdapter(simpanAdapter);
                     } else {
                         Toast.makeText(TersimpanActivity.this, "Data Kosong", Toast.LENGTH_SHORT).show();
                     }
@@ -82,7 +86,7 @@ public class TersimpanActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<SimpanResponse> call, Throwable t) {
-                Toast.makeText(TersimpanActivity.this, "Terjadi kesalahan: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(TersimpanActivity.this, "Terjadi kesalahan: Tidak Ada Data", Toast.LENGTH_SHORT).show();
                 Log.e(TAG, "onFailure: " + t.getMessage());
             }
         });

@@ -50,9 +50,9 @@ public class ApiClient {
     }
 
     public static String getBaseUrl(){
-        return "http://192.168.1.5/Project-WSI";
+        return "http://192.168.1.3/Project-WSI";
     }
     public static  String getImgUrl(){
-        return "http://192.168.1.5/Project-WSI/img";
+        return "http://192.168.1.3/Project-WSI/img";
     }
 }

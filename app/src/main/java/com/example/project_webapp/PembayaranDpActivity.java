@@ -18,8 +18,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.project_webapp.DetailActivity;
+import com.example.project_webapp.R;
 import com.example.project_webapp.Service.ApiClient;
-import com.example.project_webapp.Service.HTTP.GlobalResponse;
 import com.example.project_webapp.Service.PembayaranDpService;
 import com.example.project_webapp.Service.SharedPreference.Preferences;
 import com.google.android.material.textfield.TextInputEditText;
@@ -62,57 +63,32 @@ public class PembayaranDpActivity extends AppCompatActivity {
 
         submitButton.setOnClickListener(view -> submitOrder());
 
-        // Mendapatkan id_pemesanan_rumah dari intent
         String idPemesananRumah = getIntent().getStringExtra("id_pemesanan_rumah");
-
-        // Menampilkan id_pemesanan_rumah pada TextView
         idpemesanan.setText(idPemesananRumah);
 
-        txttanggal = (EditText) findViewById(R.id.txttanggal);
+        txttanggal = findViewById(R.id.txttanggal);
         dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         backBtn = findViewById(R.id.backbtn);
-        txttanggal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showDateDialog();
-            }
+        txttanggal.setOnClickListener(view -> showDateDialog());
+        backBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(PembayaranDpActivity.this, DetailActivity.class);
+            startActivity(intent);
         });
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PembayaranDpActivity.this, DetailActivity.class);
-                startActivity(intent);
-            }
-        });
-        pickImageButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chooseImage(v);
-            }
-        });
+        pickImageButton.setOnClickListener(view -> chooseImage());
     }
 
-    private String getFileNameFromPath(String filePath) {
-        String[] segments = filePath.split("/");
-        String fileName = segments[segments.length - 1];
-        return fileName;
-    }
-
-    private void chooseImage(View v) {
+    private void chooseImage() {
         String[] options = {"Upload Gambar", "Ambil Foto"};
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Pilih Opsi");
-        builder.setItems(options, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                if (which == 0) {
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    startActivityForResult(intent, REQUEST_PICK_IMAGE);
-                } else if (which == 1) {
-                    Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-                    startActivityForResult(intent, REQUEST_CAMERA);
-                }
+        builder.setItems(options, (dialog, which) -> {
+            if (which == 0) {
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(intent, REQUEST_PICK_IMAGE);
+            } else if (which == 1) {
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, REQUEST_CAMERA);
             }
         });
         builder.show();
@@ -124,35 +100,31 @@ public class PembayaranDpActivity extends AppCompatActivity {
             return;
         }
 
-        submitOrderWithFile(selectedFile);
-    }
+        String idPemesananRumah = idpemesanan.getText().toString();
+        String tglPembayaranDp = txttanggal.getText().toString();
 
-    private void submitOrderWithFile(File selectedFile) {
-        RequestBody idPemesananRumah = RequestBody.create(MediaType.parse("text/plain"),idpemesanan.getText().toString());
-        RequestBody tglPembayaranDp = RequestBody.create(MediaType.parse("text/plain"), txttanggal.getText().toString());
+        RequestBody requestBodyIdPemesananRumah = RequestBody.create(MediaType.parse("text/plain"), idPemesananRumah);
+        RequestBody requestBodyTglPembayaranDp = RequestBody.create(MediaType.parse("text/plain"), tglPembayaranDp);
 
-        File file = new File(selectedFile.getPath());
-        RequestBody fileRequestBody = RequestBody.create(file, MediaType.parse("image/jpeg"));
-        MultipartBody.Part filePart = MultipartBody.Part.createFormData("bukti_pembayaran_dp", file.getName(), fileRequestBody);
+        RequestBody requestBodyBuktiPembayaranDp = RequestBody.create(selectedFile, MediaType.parse("image/jpeg"));
+        MultipartBody.Part buktiPembayaranDpPart = MultipartBody.Part.createFormData("bukti_pembayaran_dp", selectedFile.getName(), requestBodyBuktiPembayaranDp);
 
-        PembayaranDpService service = ApiClient.getPembayaranService(PembayaranDpActivity.this);
-        Call<GlobalResponse> call = service.submitOrder(idPemesananRumah, tglPembayaranDp, filePart);
+        PembayaranDpService service = ApiClient.getPembayaranService(this);
+        Call<Void> call = service.submitOrder(requestBodyIdPemesananRumah, requestBodyTglPembayaranDp, buktiPembayaranDpPart);
 
-        call.enqueue(new Callback<GlobalResponse>() {
+        call.enqueue(new Callback<Void>() {
             @Override
-            public void onResponse(Call<GlobalResponse> call, Response<GlobalResponse> response) {
+            public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    GlobalResponse globalResponse = response.body();
-                    if (globalResponse != null) {
-                        Toast.makeText(PembayaranDpActivity.this, globalResponse.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
+                    Toast.makeText(PembayaranDpActivity.this, "Pembayaran DP berhasil dikirim", Toast.LENGTH_SHORT).show();
+                    // Lakukan tindakan setelah pembayaran DP berhasil dikirim
                 } else {
                     Toast.makeText(PembayaranDpActivity.this, "Gagal mengirim pesanan", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<GlobalResponse> call, Throwable t) {
+            public void onFailure(Call<Void> call, Throwable t) {
                 Toast.makeText(PembayaranDpActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
@@ -202,14 +174,10 @@ public class PembayaranDpActivity extends AppCompatActivity {
 
     private void showDateDialog() {
         Calendar newCalendar = Calendar.getInstance();
-        datePickerDialog = new DatePickerDialog(PembayaranDpActivity.this, new DatePickerDialog.OnDateSetListener() {
-
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                Calendar newDate = Calendar.getInstance();
-                newDate.set(year, monthOfYear, dayOfMonth);
-                txttanggal.setText(dateFormatter.format(newDate.getTime()));
-            }
-
+        datePickerDialog = new DatePickerDialog(PembayaranDpActivity.this, (view, year, monthOfYear, dayOfMonth) -> {
+            Calendar newDate = Calendar.getInstance();
+            newDate.set(year, monthOfYear, dayOfMonth);
+            txttanggal.setText(dateFormatter.format(newDate.getTime()));
         }, newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
         datePickerDialog.show();

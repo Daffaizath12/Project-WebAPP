@@ -55,14 +55,6 @@
             android:paddingTop="5dp"
             android:textSize="14dp" />
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:fontFamily="@font/poppinssemibold"
-            android:text="Lupa Sandi"
-            android:textColor="@color/btn" />
-
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/startBtn"
             style="@android:style/Widget.Button"

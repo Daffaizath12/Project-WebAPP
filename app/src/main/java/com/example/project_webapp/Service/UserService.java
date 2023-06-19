@@ -5,6 +5,8 @@ import com.example.project_webapp.Service.HTTP.LoginRequest;
 import com.example.project_webapp.Service.HTTP.LoginResponse;
 import com.example.project_webapp.Service.HTTP.ProgresResponse;
 import com.example.project_webapp.Service.HTTP.RegisterRequest;
+import com.example.project_webapp.Service.HTTP.RiwayatIHResponse;
+import com.example.project_webapp.Service.HTTP.RiwayatResponse;
 import com.example.project_webapp.Service.HTTP.SimpanResponse;
 import com.example.project_webapp.Service.HTTP.SimpanRequest;
 import com.example.project_webapp.Service.HTTP.UserResponse;
@@ -33,5 +35,11 @@ public interface UserService {
 
     @GET("progres_api.php")
     Call<ProgresResponse> getProgres(@Query("id_user") String idUser);
+
+    @GET("riwayat_pembayarandp.php")
+    Call<RiwayatResponse> getRiwayatDp(@Query("id_user") String id_user);
+
+    @GET("riwayat_pembayaraninhouse.php")
+    Call<RiwayatIHResponse> getRiwayatinhouse(@Query("id_user") String id_user);
 }
 

@@ -58,16 +58,20 @@ public class TersimpanActivity extends AppCompatActivity {
                     if (simpanResponse != null) {
                         String idSimpan = simpanResponse.getIdSimpan();
                         String idCluster = simpanResponse.getIdCluster();
-                        String fotocluster = simpanResponse.getFotocluster();
+                        String fotocluster = simpanResponse.getFotoCluster();
                         String harga = simpanResponse.getHarga();
-                        String namacluster = simpanResponse.getNamacluster();
+                        String namacluster = simpanResponse.getNamaCluster();
 
-                        SimpanData simpanData = new SimpanData(idSimpan, idCluster, ApiClient.getBaseUrl()+"img//images_cluster/"+fotocluster, harga, namacluster);
+                        SimpanData simpanData = new SimpanData(idSimpan, idCluster, ApiClient.getBaseUrl()+"img/images_cluster/"+fotocluster, harga, namacluster);
                         List<SimpanData> simpanList = new ArrayList<>();
                         simpanList.add(simpanData);
 
-                        SimpanAdapter simpanAdapter = new SimpanAdapter(simpanList, TersimpanActivity.this);
-                        recyclerView.setAdapter(simpanAdapter);
+                        if (simpanList.isEmpty()) {
+                            Toast.makeText(TersimpanActivity.this, "Data Kosong", Toast.LENGTH_SHORT).show();
+                        } else {
+                            SimpanAdapter simpanAdapter = new SimpanAdapter(simpanList, TersimpanActivity.this);
+                            recyclerView.setAdapter(simpanAdapter);
+                        }
                     } else {
                         Toast.makeText(TersimpanActivity.this, "Data Kosong", Toast.LENGTH_SHORT).show();
                     }
@@ -83,4 +87,5 @@ public class TersimpanActivity extends AppCompatActivity {
             }
         });
     }
+
 }

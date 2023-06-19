@@ -102,14 +102,14 @@
                         android:background="@drawable/round_menu_button"
                         app:tint="@color/btn"
                         android:padding="10dp"
-                        android:src="@drawable/pemesanan"/>
+                        android:src="@drawable/baseline_history_24"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginStart="55dp"
-                        android:text="Pemesanan"
+                        android:text="Riwayat Pembayaran"
                         android:fontFamily="@font/poppinssemibold"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -123,6 +123,7 @@
 
                 </RelativeLayout>
                 <RelativeLayout
+                    android:id="@+id/pembayaran"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingTop="3dp"

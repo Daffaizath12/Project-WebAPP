@@ -113,7 +113,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/cluster"
+                    android:id="@+id/notelp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -139,7 +139,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/cluster"
+                    android:id="@+id/idcluster"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -165,7 +165,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/plafonTxt"
+                    android:id="@+id/tglpesan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -191,7 +191,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/airTxt"
+                    android:id="@+id/pembayaran"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -217,7 +217,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/listrikTxt"
+                    android:id="@+id/cicilandp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -243,7 +243,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/kamarTxt"
+                    android:id="@+id/cicilaninhouse"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -269,7 +269,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tanahTxt"
+                    android:id="@+id/detailblok"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -294,7 +294,7 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/tanahTxt"
+                    android:id="@+id/srtbangunan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
@@ -322,7 +322,7 @@
                <Button
                    android:layout_width="wrap_content"
                    android:layout_height="wrap_content"
-                   android:id="@+id/buyBtn"
+                   android:id="@+id/btnktp"
                    android:layout_weight="1"
                    android:text="Foto KTP"
                    android:textAllCaps="false"

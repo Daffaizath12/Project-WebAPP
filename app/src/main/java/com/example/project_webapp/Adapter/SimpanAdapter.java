@@ -38,7 +38,7 @@ public class SimpanAdapter extends RecyclerView.Adapter<SimpanAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         SimpanData simpanData = simpanList.get(position);
-        holder.bind(simpanData);
+        Picasso.get().load(simpanData.getFotocluster()).into(holder.pic);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
@@ -58,10 +58,6 @@ public class SimpanAdapter extends RecyclerView.Adapter<SimpanAdapter.ViewHolder
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             pic = itemView.findViewById(R.id.pic);
-        }
-
-        public void bind(SimpanData simpanData) {
-            Picasso.get().load(simpanData.getFotocluster()).into(pic);
         }
     }
 }

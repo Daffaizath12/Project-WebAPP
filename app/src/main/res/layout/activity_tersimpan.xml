@@ -11,34 +11,45 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <RelativeLayout
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:background="@color/btn">
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            app:elevation="0dp">
 
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?actionBarSize"
+                android:background="#1e3d59">
 
-            <ImageView
-                android:layout_width="66dp"
-                android:layout_height="54dp"
-                app:srcCompat="@drawable/bernady_logo"
-                tools:layout_editor_absoluteX="16dp"
-                tools:layout_editor_absoluteY="8dp" />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bernady Land Slawu"
-                android:textColor="#f5f0e1"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppinsregular"
-                tools:layout_editor_absoluteX="89dp"
-                tools:layout_editor_absoluteY="22dp"
-                android:layout_centerVertical="true"
-                android:layout_marginStart="70dp"/>
+                    <ImageView
+                        android:id="@+id/backbtn"
+                        android:layout_width="50dp"
+                        android:layout_height="55dp"
+                        app:srcCompat="@drawable/baseline_arrow_back_24"
+                        android:padding="12dp"/>
 
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_marginStart="50dp"
+                        android:text="Bernady Land Slawu"
+                        android:fontFamily="@font/poppinssemibold"
+                        android:textColor="#f5f0e1"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-        </RelativeLayout>
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.Toolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent">

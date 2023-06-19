@@ -43,11 +43,16 @@ public class ApiClient {
 
         return pemesananService;
     }
+    public static PembayaranDpService getPembayaranService(Context pembayaranDpActivity) {
+        PembayaranDpService pembayaranService = getRetrofit().create(PembayaranDpService.class);
+
+        return pembayaranService;
+    }
 
     public static String getBaseUrl(){
-        return "http://192.168.1.8/Project-WSI";
+        return "http://192.168.1.5/Project-WSI";
     }
     public static  String getImgUrl(){
-        return "http://192.168.1.8/Project-WSI/img";
+        return "http://192.168.1.5/Project-WSI/img";
     }
 }

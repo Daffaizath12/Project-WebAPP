@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import com.example.project_webapp.DetailActivity;
 import com.example.project_webapp.LoginActivity;
+import com.example.project_webapp.PembayaranActivity;
 import com.example.project_webapp.ProgresPemesananActivity;
 import com.example.project_webapp.R;
 import com.example.project_webapp.Service.ApiClient;
@@ -48,7 +49,7 @@ public class SettingFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RelativeLayout logoutBtn, SimpanCluster, Progresbtn;
+    private RelativeLayout logoutBtn, SimpanCluster, Progresbtn, pembayaran;
     private TextView nama, email;
     private View rootview;
     private SharedPreferences preferences;
@@ -95,6 +96,7 @@ public class SettingFragment extends Fragment {
          SimpanCluster = rootview.findViewById(R.id.simpancluster);
          logoutBtn = rootview.findViewById(R.id.logoutbutton);
          Progresbtn = rootview.findViewById(R.id.progresbtn);
+         pembayaran = rootview.findViewById(R.id.pembayaran);
 
         // Inisialisasi SharedPreferences
         preferences = PreferenceManager.getDefaultSharedPreferences(rootview.getContext());
@@ -123,6 +125,19 @@ public class SettingFragment extends Fragment {
 
                 // Intent ke Activity lain
                 Intent intent = new Intent(getActivity(), ProgresPemesananActivity.class);
+                intent.putExtra("id_user", idUser);
+                startActivity(intent);
+            }
+        });
+
+        pembayaran.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Mendapatkan id_user secara otomatis (misalnya dari SharedPreferences atau dari sumber data lainnya)
+                String idUser = Preferences.getLoggedInToken(getActivity());
+
+                // Intent ke Activity lain
+                Intent intent = new Intent(getActivity(), PembayaranActivity.class);
                 intent.putExtra("id_user", idUser);
                 startActivity(intent);
             }

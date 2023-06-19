@@ -15,13 +15,19 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31" >
         <activity
-            android:name=".PembayaranDetail"
+            android:name=".PembayaranDpActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PembayaranInHouseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".PembayaranActivity"
             android:exported="false" />
         <activity
             android:name=".ProgresPemesananActivity"
             android:exported="false" />
         <activity
-            android:name=".RiwayatPembayaran"
+            android:name=".RiwayatPembayaranDpActivity"
             android:exported="false" />
         <activity
             android:name=".TersimpanActivity"

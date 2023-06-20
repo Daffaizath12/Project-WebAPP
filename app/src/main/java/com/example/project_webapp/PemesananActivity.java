@@ -51,9 +51,9 @@ import retrofit2.Response;
 
 public class PemesananActivity extends AppCompatActivity {
 
-    String[] item2 = {"InHouse", "KPR"};
-    String[] item3 = {"1", "2"};
-    String[] item4 = {"1", "2"};
+    String[] item2 = {"DP", "Inhouse"};
+    String[] item3 = {"1", "2", "3", "4"};
+    String[] item4 = {"1", "2", "3", "4"};
     AutoCompleteTextView autoCompleteTextView, pembayaran, dp, inhouse;
     String autoCompleteTextViewvalue, pembayaranvalue, dpvalue, inhousevalue;
     ArrayAdapter<String> adapterItem, adapterItemPembayaran, getAdapterItemdp, getAdapterIteminhouse;

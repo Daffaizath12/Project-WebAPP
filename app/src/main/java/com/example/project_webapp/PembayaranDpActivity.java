@@ -71,7 +71,7 @@ public class PembayaranDpActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.backbtn);
         txttanggal.setOnClickListener(view -> showDateDialog());
         backBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(PembayaranDpActivity.this, DetailActivity.class);
+            Intent intent = new Intent(PembayaranDpActivity.this, PembayaranActivity.class);
             startActivity(intent);
         });
         pickImageButton.setOnClickListener(view -> chooseImage());

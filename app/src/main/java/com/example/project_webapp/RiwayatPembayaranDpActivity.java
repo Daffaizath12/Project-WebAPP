@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.project_webapp.Adapter.RiwayatAdapter;
@@ -22,15 +26,27 @@ import retrofit2.Response;
 public class RiwayatPembayaranDpActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
+    ImageView backbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riwayat_pembayarandp);
 
+        backbtn = findViewById(R.id.backbtn);
+
         recyclerView = findViewById(R.id.viewriwayatdp);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(RiwayatPembayaranDpActivity.this, LinearLayoutManager.VERTICAL, false));
+
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RiwayatPembayaranDpActivity.this, PembayaranActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         // Inisialisasi SharedPreferences

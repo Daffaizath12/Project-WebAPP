@@ -107,9 +107,9 @@ public class PembayaranInHouseActivity extends AppCompatActivity {
         RequestBody requestBodyTglPembayaranInHouse = RequestBody.create(MediaType.parse("text/plain"), tglPembayaranInHouse);
 
         RequestBody requestBodyBuktiPembayaranInHouse = RequestBody.create(selectedFile, MediaType.parse("image/jpeg"));
-        MultipartBody.Part buktiPembayaranInHousePart = MultipartBody.Part.createFormData("bukti_pembayaran_dp", selectedFile.getName(), requestBodyBuktiPembayaranInHouse);
+        MultipartBody.Part buktiPembayaranInHousePart = MultipartBody.Part.createFormData("bukti_pembayaran_inhouse", selectedFile.getName(), requestBodyBuktiPembayaranInHouse);
 
-        PembayaranInHouseService service = ApiClient.getPembayaranInHouseService(this);
+        PembayaranInHouseService service = ApiClient.getPembayaranInhouseService(this);
         Call<Void> call = service.submitOrder(requestBodyIdPemesananRumah, requestBodyTglPembayaranInHouse, buktiPembayaranInHousePart);
 
         call.enqueue(new Callback<Void>() {

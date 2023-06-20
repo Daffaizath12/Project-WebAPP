@@ -22,6 +22,7 @@ import com.example.project_webapp.LoginActivity;
 import com.example.project_webapp.PembayaranActivity;
 import com.example.project_webapp.ProgresPemesananActivity;
 import com.example.project_webapp.R;
+import com.example.project_webapp.RiwayatPemesananActivity;
 import com.example.project_webapp.Service.ApiClient;
 import com.example.project_webapp.Service.HTTP.GlobalResponse;
 import com.example.project_webapp.Service.HTTP.UserResponse;
@@ -49,7 +50,7 @@ public class SettingFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private RelativeLayout logoutBtn, SimpanCluster, Progresbtn, pembayaran;
+    private RelativeLayout logoutBtn, SimpanCluster, Progresbtn, pembayaran, riwayatpemesanan;
     private TextView nama, email;
     private View rootview;
     private SharedPreferences preferences;
@@ -97,6 +98,7 @@ public class SettingFragment extends Fragment {
          logoutBtn = rootview.findViewById(R.id.logoutbutton);
          Progresbtn = rootview.findViewById(R.id.progresbtn);
          pembayaran = rootview.findViewById(R.id.pembayaran);
+         riwayatpemesanan = rootview.findViewById(R.id.riwayatpemesanan);
 
         // Inisialisasi SharedPreferences
         preferences = PreferenceManager.getDefaultSharedPreferences(rootview.getContext());
@@ -112,6 +114,19 @@ public class SettingFragment extends Fragment {
 
                 // Intent ke Activity lain
                 Intent intent = new Intent(getActivity(), TersimpanActivity.class);
+                intent.putExtra("id_user", idUser);
+                startActivity(intent);
+            }
+        });
+
+        riwayatpemesanan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Mendapatkan id_user secara otomatis (misalnya dari SharedPreferences atau dari sumber data lainnya)
+                String idUser = Preferences.getLoggedInToken(getActivity());
+
+                // Intent ke Activity lain
+                Intent intent = new Intent(getActivity(), RiwayatPemesananActivity.class);
                 intent.putExtra("id_user", idUser);
                 startActivity(intent);
             }

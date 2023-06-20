@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.example.project_webapp.Adapter.ClusterAdapter;
 import com.example.project_webapp.Adapter.ClusterData;
+import com.example.project_webapp.Fragment.HomeFragment;
 import com.example.project_webapp.Fragment.SettingFragment;
 import com.example.project_webapp.Service.ApiClient;
 import com.example.project_webapp.Service.HTTP.ClusterResponse;
@@ -56,7 +57,7 @@ public class PembayaranActivity extends AppCompatActivity {
         backbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(PembayaranActivity.this, SettingFragment.class);
+                Intent intent = new Intent(PembayaranActivity.this, HomeActivity.class);
                 startActivity(intent);
             }
         });
@@ -99,7 +100,7 @@ public class PembayaranActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Intent ke Activity lain
                 Intent intent = new Intent(PembayaranActivity.this, PembayaranInHouseActivity.class);
-                intent.putExtra("id_pemesanan_rumah", String.valueOf(idPembayaranDP));
+                intent.putExtra("id_pemesanan_rumah", String.valueOf(idPembayaranInHouse));
                 startActivity(intent);
             }
         });
@@ -125,11 +126,11 @@ public class PembayaranActivity extends AppCompatActivity {
                     for (int i = 0; i < pembayaranList.size(); i++) {
                         PembayaranResponse.Data pembayaran = pembayaranList.get(i);
                         if (i==0){
-                            idPembayaranDP = pembayaran.getId_cluster();
-                            idPembayaranInHouse = pembayaran.getId_cluster();
+                            idPembayaranDP = pembayaran.getId_pemesanan_rumah();
+                            idPembayaranInHouse = pembayaran.getId_pemesanan_rumah();
                         }
                         String namaCluster = pembayaran.getNama_cluster();
-                        int idCluster = pembayaran.getId_cluster();
+                        int idCluster = pembayaran.getId_pemesanan_rumah();
 
                         // Tambahkan namaCluster ke dalam clusterList
                         clusterList.add(namaCluster);

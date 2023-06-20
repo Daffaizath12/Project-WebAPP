@@ -1,6 +1,9 @@
 package com.example.project_webapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,15 +25,27 @@ import retrofit2.Response;
 
 public class RiwayatPembayaranInHouseActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
+    ImageView backbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_riwayat_pembayaraninhouse);
 
+        backbtn = findViewById(R.id.backbtn);
+
         recyclerView = findViewById(R.id.viewriwayatinhouse);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(RiwayatPembayaranInHouseActivity.this, LinearLayoutManager.VERTICAL, false));
+
+
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(RiwayatPembayaranInHouseActivity.this, PembayaranActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         // Inisialisasi SharedPreferences

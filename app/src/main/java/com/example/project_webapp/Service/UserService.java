@@ -1,9 +1,11 @@
 package com.example.project_webapp.Service;
 
+import com.example.project_webapp.RiwayatPemesananActivity;
 import com.example.project_webapp.Service.HTTP.GlobalResponse;
 import com.example.project_webapp.Service.HTTP.LoginRequest;
 import com.example.project_webapp.Service.HTTP.LoginResponse;
 import com.example.project_webapp.Service.HTTP.ProgresResponse;
+import com.example.project_webapp.Service.HTTP.RIwayatPemesananResponse;
 import com.example.project_webapp.Service.HTTP.RegisterRequest;
 import com.example.project_webapp.Service.HTTP.RiwayatIHResponse;
 import com.example.project_webapp.Service.HTTP.RiwayatResponse;
@@ -41,5 +43,8 @@ public interface UserService {
 
     @GET("riwayat_pembayaraninhouse.php")
     Call<RiwayatIHResponse> getRiwayatinhouse(@Query("id_user") String id_user);
+
+    @GET("serah_terima.php")
+    Call<RIwayatPemesananResponse> getRiwayatPemesanan(@Query("id_user") String id_user);
 }
 

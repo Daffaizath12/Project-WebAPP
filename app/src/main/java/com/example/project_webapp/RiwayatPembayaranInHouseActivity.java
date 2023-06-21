@@ -79,7 +79,7 @@ public class RiwayatPembayaranInHouseActivity extends AppCompatActivity {
                             String tgl = data.getTgl();
                             String bukti = data.getBukti();
 
-                            riwayatIHData[i] = new RiwayatIHData(idPembayaran, idCluster, namaPemesan, namaCluster, status, tgl, ApiClient.getBaseUrl()+"/api/"+bukti);
+                            riwayatIHData[i] = new RiwayatIHData(idPembayaran, idCluster, namaPemesan, namaCluster, status, tgl, ApiClient.getBaseUrl()+"/img/bukti_inhouse/"+bukti);
                         }
 
                         RiwayatIHAdapter inhouseAdapter = new RiwayatIHAdapter(riwayatIHData, RiwayatPembayaranInHouseActivity.this);

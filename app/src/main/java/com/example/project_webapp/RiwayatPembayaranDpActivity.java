@@ -80,7 +80,7 @@ public class RiwayatPembayaranDpActivity extends AppCompatActivity {
                             String tgl = data.getTgl();
                             String bukti = data.getBukti();
 
-                            riwayatData[i] = new RiwayatData(idPembayaran, idCluster, namaPemesan, namaCluster, status, tgl, ApiClient.getBaseUrl()+"/api/"+bukti);
+                            riwayatData[i] = new RiwayatData(idPembayaran, idCluster, namaPemesan, namaCluster, status, tgl, ApiClient.getBaseUrl()+"/img/pembayaran_dp/"+bukti);
                         }
 
                         RiwayatAdapter riwayatAdapter = new RiwayatAdapter(riwayatData, RiwayatPembayaranDpActivity.this);

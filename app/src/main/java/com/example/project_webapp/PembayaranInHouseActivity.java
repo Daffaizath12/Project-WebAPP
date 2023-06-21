@@ -116,8 +116,19 @@ public class PembayaranInHouseActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
-                    Toast.makeText(PembayaranInHouseActivity.this, "Pembayaran InHouse berhasil dikirim", Toast.LENGTH_SHORT).show();
-                    // Lakukan tindakan setelah pembayaran InHouse berhasil dikirim
+                    AlertDialog.Builder builder = new AlertDialog.Builder(PembayaranInHouseActivity.this);
+                    builder.setTitle("Pembayaran Berhasil");
+                    builder.setMessage("Pembayaran InHouse berhasil dikirim.");
+                    builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            // Intent ke PembayaranActivity
+                            Intent intent = new Intent(PembayaranInHouseActivity.this, PembayaranActivity.class);
+                            startActivity(intent);
+                        }
+                    });
+                    builder.setCancelable(false);
+                    builder.show();
                 } else {
                     Toast.makeText(PembayaranInHouseActivity.this, "Gagal mengirim pesanan", Toast.LENGTH_SHORT).show();
                 }

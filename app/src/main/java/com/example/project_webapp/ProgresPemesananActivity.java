@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.project_webapp.Adapter.ProgresAdapter;
@@ -43,15 +45,24 @@ import retrofit2.Response;
 public class ProgresPemesananActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
 
+    ImageView backbtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progres_pemesanan);
 
+        backbtn = findViewById(R.id.backbtn);
+
         recyclerView = findViewById(R.id.viewprogres);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(ProgresPemesananActivity.this, LinearLayoutManager.VERTICAL, false));
 
+
+        backbtn.setOnClickListener(view -> {
+            Intent intent = new Intent(ProgresPemesananActivity.this, HomeActivity.class);
+            startActivity(intent);
+        });
 
         // Inisialisasi SharedPreferences
         String idUser = Preferences.getLoggedInToken(ProgresPemesananActivity.this);

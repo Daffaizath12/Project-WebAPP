@@ -40,7 +40,7 @@
                         android:layout_centerInParent="true"
                         android:layout_marginStart="50dp"
                         android:fontFamily="@font/poppinssemibold"
-                        android:text="Benady Land Slawu"
+                        android:text="Bernady Land Slawu"
                         android:textColor="#f5f0e1"
                         android:textSize="20sp"
                         android:textStyle="bold" />

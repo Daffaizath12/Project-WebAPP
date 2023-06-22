@@ -82,7 +82,7 @@ public class RiwayatPemesananActivity extends AppCompatActivity {
                             String suratbangunan = data.getSurat_bangunan();
                             String ktp = data.getKtp();
 
-                            riwayatPemesananData[i] = new RiwayatPemesananData(namaPemesan, alamat, telp, namaCluster, tgl, pembayaran, dp, inhouse, blok, suratbangunan, ApiClient.getBaseUrl()+"/api/"+ktp);
+                            riwayatPemesananData[i] = new RiwayatPemesananData(namaPemesan, alamat, telp, namaCluster, tgl, pembayaran, dp, inhouse, blok, suratbangunan, ApiClient.getBaseUrl()+"/img/filepemesanan/"+ktp);
                         }
 
                         RiwayatPemesananAdapter riwayatPemesananAdapter = new RiwayatPemesananAdapter(riwayatPemesananData, RiwayatPemesananActivity.this);

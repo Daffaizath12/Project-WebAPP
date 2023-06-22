@@ -48,6 +48,8 @@ public class ApiClient {
 
         return pembayaranService;
     }
+
+
     public static PembayaranInHouseService getPembayaranInhouseService(Context pembayaranInHouseActivity) {
         PembayaranInHouseService pembayaranInhouseService = getRetrofit().create(PembayaranInHouseService.class);
 
@@ -55,9 +57,9 @@ public class ApiClient {
     }
 
     public static String getBaseUrl(){
-        return "http://192.168.1.3/Project-WSI";
+        return "http://10.10.5.131/Project-WSI";
     }
     public static  String getImgUrl(){
-        return "http://192.168.1.3/Project-WSI/img";
+        return "http://10.10.183.219/Project-WSI/img";
     }
 }

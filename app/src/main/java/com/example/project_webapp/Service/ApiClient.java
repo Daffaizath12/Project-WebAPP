@@ -57,9 +57,12 @@ public class ApiClient {
     }
 
     public static String getBaseUrl(){
-        return "http://10.10.5.131/Project-WSI";
+        return "http://bernadylandslawu.wsmif3a.id/api/register_api.php";
+    }
+    public static String getBaseLogin(){
+        return "http://bernadylandslawu.wsmif3a.id/api/login_api.php";
     }
     public static  String getImgUrl(){
-        return "http://10.10.183.219/Project-WSI/img";
+        return "http://bernadylandslawu.wsmif3a.id/api";
     }
 }
